@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
+import applianceRoutes from './routes/applianceRoutes.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 // API Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/appliances', applianceRoutes);
 
 // Base Health Check Route
 app.get('/api/v1/health', (req, res) => {
