@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Initialize Socket.io with CORS settings
+// Initialize Socket.io
 const io = new Server(server, {
   cors: {
     origin: '*',
@@ -21,32 +21,23 @@ const io = new Server(server, {
   },
 });
 
-// Connect to MongoDB Database
+// Connect Database
 connectDB();
 
-// Essential Middlewares
+// Middlewares
 app.use(express.json());
 app.use(cors());
 
-// Attach io instance to request object and MUST call next()
+// Pass Socket.io to Requests
 app.use((req, res, next) => {
   req.io = io;
-  next(); // <--- මෙතන next() call කිරීම අත්‍යවශ්‍යයි!
+  next();
 });
 
-// Socket.io Connection Event
-io.on('connection', (socket) => {
-  console.log(`[Socket.io] Client Connected: ${socket.id}`);
-
-  socket.on('disconnect', () => {
-    console.log(`[Socket.io] Client Disconnected: ${socket.id}`);
-  });
-});
-
-// Start Virtual IoT Data Streamer
+// Start IoT Simulator
 startIoTSimulator(io);
 
-// API Routes
+// Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/appliances', applianceRoutes);
 
@@ -54,13 +45,20 @@ app.use('/api/v1/appliances', applianceRoutes);
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
     status: 'success',
-    message: 'SmartSurge Backend Server is running successfully with Socket.io!',
-    timestamp: new Date(),
+    message: 'SmartSurge Backend Running',
+  });
+});
+
+// Centralized Error Handling Middleware (MUST HAVE 4 PARAMETERS)
+app.use((err, req, res, next) => {
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  res.status(statusCode).json({
+    message: err.message || 'Internal Server Error',
   });
 });
 
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
-  console.log(`[Server] SmartSurge Express Server running on Port: ${PORT}`);
+  console.log(`[Server] Express running on Port: ${PORT}`);
 });
