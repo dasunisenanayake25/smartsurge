@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // Initialize Socket.io with CORS settings
 const io = new Server(server, {
   cors: {
-    origin: '*', // Allow all origins for dev environment
+    origin: '*',
     methods: ['GET', 'POST'],
   },
 });
@@ -28,10 +28,10 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-// Attach io instance to request object (so controllers can access it)
+// Attach io instance to request object and MUST call next()
 app.use((req, res, next) => {
   req.io = io;
-  next();
+  next(); // <--- මෙතන next() call කිරීම අත්‍යවශ්‍යයි!
 });
 
 // Socket.io Connection Event
@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Start Virtual IoT Data Streamer (Generates live data every 3 seconds)
+// Start Virtual IoT Data Streamer
 startIoTSimulator(io);
 
 // API Routes
