@@ -5,21 +5,17 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Please provide a name'],
-      trim: true,
+      required: [true, 'Please add a name'],
     },
     email: {
       type: String,
-      required: [true, 'Please provide an email'],
+      required: [true, 'Please add an email'],
       unique: true,
       lowercase: true,
-      trim: true,
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
-      minlength: [6, 'Password must be at least 6 characters'],
-      select: false,
+      required: [true, 'Please add a password'],
     },
     role: {
       type: String,
@@ -30,29 +26,26 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 5000,
     },
-    avatar: {
-      type: String,
-      default: '',
-    },
   },
   {
     timestamps: true,
   }
 );
 
-// Hash password before saving to database
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-// Compare entered password with hashed password in database
+// Match user entered password to hashed password in database
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Encrypt password before saving (Modern Async Pre-hook - NO `next()` needed)
+userSchema.pre('save', async function () {
+  if (!this.isModified('password')) {
+    return;
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 const User = mongoose.model('User', userSchema);
+
 export default User;
