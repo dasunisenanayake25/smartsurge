@@ -6,6 +6,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import applianceRoutes from './routes/applianceRoutes.js';
+import energyRoutes from './routes/energyRoutes.js'; // Added Energy Routes
 import { startIoTSimulator } from './services/iotSimulator.js';
 
 dotenv.config();
@@ -28,37 +29,38 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-// Pass Socket.io to Requests
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
 
-// Start IoT Simulator
-startIoTSimulator(io);
-
-// Routes
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/appliances', applianceRoutes);
-
-// Base Health Check Route
-app.get('/api/v1/health', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    message: 'SmartSurge Backend Running',
+// Socket.io Connection
+io.on('connection', (socket) => {
+  console.log(`[Socket.io] Client Connected: ${socket.id}`);
+  socket.on('disconnect', () => {
+    console.log(`[Socket.io] Client Disconnected: ${socket.id}`);
   });
 });
 
-// Centralized Error Handling Middleware (MUST HAVE 4 PARAMETERS)
-app.use((err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  res.status(statusCode).json({
-    message: err.message || 'Internal Server Error',
+// Start IoT Streamer
+startIoTSimulator(io);
+
+// API Routes
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/appliances', applianceRoutes);
+app.use('/api/v1/energy', energyRoutes); // Mounted Energy Routes
+
+// Health Check Route
+app.get('/api/v1/health', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'SmartSurge Backend Server is running successfully with Socket.io!',
+    timestamp: new Date(),
   });
 });
 
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => {
-  console.log(`[Server] Express running on Port: ${PORT}`);
+  console.log(`[Server] SmartSurge Express Server running on Port: ${PORT}`);
 });
