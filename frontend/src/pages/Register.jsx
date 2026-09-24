@@ -1,20 +1,36 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Zap } from 'lucide-react';
+import { Fingerprint, Eye, EyeOff } from 'lucide-react';
 
 const Register = () => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
+  
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    if (!agreeTerms) {
+      setError('You must agree to the Terms of Service');
+      return;
+    }
+
     try {
-      await register(name, email, password);
+      const fullName = `${firstName} ${lastName}`.trim();
+      await register(fullName, email, password);
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
@@ -22,60 +38,143 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-4 relative overflow-hidden">
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-500/20 blur-[100px] rounded-full pointer-events-none"></div>
-      
-      <div className="w-full max-w-md bg-slate-800/80 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl relative z-10">
-        <div className="flex flex-col items-center mb-8">
-          <Zap className="text-cyan-400 fill-cyan-400 mb-2" size={40} />
-          <h2 className="text-3xl font-bold text-white">Create Account</h2>
-          <p className="text-gray-400 mt-2">Join SmartSurge to optimize your energy</p>
+    <div 
+      className="h-screen overflow-hidden bg-cover bg-center flex items-center justify-center lg:justify-end px-4 lg:px-24"
+      style={{ backgroundImage: "url('/bg-login.jpg')" }}
+    >
+      {/* Glassmorphism Register Panel */}
+      <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
+        
+        {/* Logo */}
+        <div className="flex justify-center mb-3">
+          <div className="p-2.5 border border-amber-200/50 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+             <Fingerprint className="text-amber-200" size={32} strokeWidth={1} />
+          </div>
         </div>
 
-        {error && <div className="bg-red-500/20 text-red-400 p-3 rounded-xl mb-6 text-sm text-center border border-red-500/20">{error}</div>}
+        {/* Headings */}
+        <h2 className="text-2xl md:text-3xl text-white mb-2 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+          Welcome to <br/> SmartSurge
+        </h2>
+        <p className="text-gray-200 text-xs md:text-sm mb-4 font-light">
+          Create an account to manage your smart network.
+        </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5">Full Name</label>
-            <input 
-              type="text" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
-              placeholder="Dasun Senanayake"
-            />
+        <h3 className="text-lg text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Create an Account</h3>
+
+        {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-3 text-xs border border-red-500/20">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 text-left">
+          
+          {/* First Name & Last Name (Side by Side) */}
+          <div className="flex flex-col sm:flex-row gap-3.5">
+            <div className="flex-1">
+              <label className="block text-[11px] text-gray-200 mb-1 ml-1">First Name</label>
+              <input 
+                type="text" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                className="w-full bg-black/20 border border-white/30 text-white placeholder-gray-400 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-300 transition text-[13px]"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-[11px] text-gray-200 mb-1 ml-1">Last Name</label>
+              <input 
+                type="text" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+                className="w-full bg-black/20 border border-white/30 text-white placeholder-gray-400 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-300 transition text-[13px]"
+                placeholder="Enter your last name"
+              />
+            </div>
           </div>
+
+          {/* Email Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5">Email Address</label>
+            <label className="block text-[11px] text-gray-200 mb-1 ml-1">Your Email</label>
             <input 
               type="email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
-              placeholder="you@example.com"
+              className="w-full bg-black/20 border border-white/30 text-white placeholder-gray-400 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-300 transition text-[13px]"
+              placeholder="Enter your email here"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1.5">Password</label>
+
+          {/* Password & Confirm Password (Side by Side) */}
+          <div className="flex flex-col sm:flex-row gap-3.5">
+            <div className="flex-1">
+              <label className="block text-[11px] text-gray-200 mb-1 ml-1">Password</label>
+              <div className="relative">
+                <input 
+                  type={showPassword ? "text" : "password"} 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full bg-black/20 border border-white/30 text-white placeholder-gray-400 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:border-amber-300 transition text-[13px]"
+                  placeholder="Enter your secure password here"
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition"
+                >
+                  {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex-1">
+              <label className="block text-[11px] text-gray-200 mb-1 ml-1">Confirm Password</label>
+              <div className="relative">
+                <input 
+                  type={showConfirmPassword ? "text" : "password"} 
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className="w-full bg-black/20 border border-white/30 text-white placeholder-gray-400 rounded-lg px-3 py-2 pr-10 focus:outline-none focus:border-amber-300 transition text-[13px]"
+                  placeholder="Re-enter your password here"
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition"
+                >
+                  {showConfirmPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Terms Checkbox */}
+          <div className="flex items-center gap-2 mt-1">
             <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
-              placeholder="••••••••"
+              type="checkbox" 
+              id="terms" 
+              checked={agreeTerms}
+              onChange={(e) => setAgreeTerms(e.target.checked)}
+              className="w-3.5 h-3.5 rounded border-gray-400 text-amber-500 focus:ring-amber-500 bg-transparent"
             />
+            <label htmlFor="terms" className="text-[11px] text-gray-300">
+              I agree to the Terms of Service
+            </label>
           </div>
-          <button type="submit" className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold py-3 rounded-xl transition mt-2 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-            Register Account
+
+          {/* Register Button */}
+          <button type="submit" className="w-full bg-[#1a1a1a] hover:bg-black text-gray-200 font-medium py-2.5 rounded-lg transition shadow-lg mt-1 border border-white/5 text-[13px]">
+            Register
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-6 text-sm">
-          Already have an account? <Link to="/login" className="text-cyan-400 hover:text-cyan-300 font-medium">Login here</Link>
+        {/* Login Link */}
+        <p className="mt-5 text-xs text-gray-300 font-light">
+          Already have an account? <Link to="/login" className="text-gray-100 font-medium hover:text-amber-200 transition">Login</Link>
         </p>
+
       </div>
     </div>
   );
