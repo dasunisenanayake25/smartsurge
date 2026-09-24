@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Activity, Leaf, Smartphone } from 'lucide-react';
+import { Activity, Leaf, Smartphone } from 'lucide-react';
 
 const Landing = () => {
   return (
     <div className="min-h-screen bg-[#0F172A] text-white font-sans">
       {/* Navbar */}
       <nav className="flex justify-between items-center px-6 md:px-12 py-6 max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <Zap className="text-cyan-400 fill-cyan-400" size={28} />
+        <div className="flex items-center gap-3">
+          <img src="/logo_transparent.png" alt="Logo" className="w-10 h-10 object-contain rounded-full shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
           <span className="text-2xl font-bold tracking-tight">SmartSurge</span>
         </div>
         <div className="flex gap-4">

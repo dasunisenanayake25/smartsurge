@@ -16,8 +16,8 @@ const Sidebar = () => {
     <aside className="w-24 md:w-28 h-screen bg-black/40 backdrop-blur-xl border-r border-white/10 flex flex-col items-center py-6 flex-shrink-0 z-50">
       
       {/* Logo Area */}
-      <div className="mb-8 flex flex-col items-center justify-center">
-        <Zap className="text-amber-300 fill-amber-300 mb-1" size={32} />
+      <div className="mb-8 flex flex-col items-center justify-center mt-2">
+        <img src="/logo_transparent.png" alt="Logo" className="w-12 h-12 object-contain rounded-full shadow-[0_0_15px_rgba(251,191,36,0.3)]" />
       </div>
 
       {/* Navigation Links */}

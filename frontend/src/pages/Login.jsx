@@ -31,9 +31,7 @@ const Login = () => {
         
         {/* Logo */}
         <div className="flex justify-center mb-4">
-          <div className="p-2.5 border border-amber-200/50 rounded-full shadow-[0_0_15px_rgba(251,191,36,0.3)]">
-             <Fingerprint className="text-amber-200" size={32} strokeWidth={1} />
-          </div>
+          <img src="/logo_transparent.png" alt="SmartSurge Logo" className="w-20 h-20 object-contain rounded-full" />
         </div>
 
         {/* Headings */}
