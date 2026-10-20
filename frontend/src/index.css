@@ -1,15 +1,7 @@
 @import "tailwindcss";
 
-@theme {
-  --color-darkBg: #0f172a;
-  --color-cardBg: #1e293b;
-  --color-electricBlue: #3b82f6;
-  --color-neonGreen: #10b981;
-  --color-solarAmber: #f59e0b;
-}
-
 body {
-  background-color: #0f172a;
-  color: #f8fafc;
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', sans-serif;
 }

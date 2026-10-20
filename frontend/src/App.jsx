@@ -10,7 +10,7 @@ import Register from './pages/Register';
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  if (loading) return <div className="h-screen bg-[#0F172A] text-white flex items-center justify-center">Loading...</div>;
+  if (loading) return <div className="h-screen bg-darkBg text-white flex items-center justify-center">Loading...</div>;
   return user ? children : <Navigate to="/login" />;
 };
 
