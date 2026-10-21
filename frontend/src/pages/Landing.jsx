@@ -1,209 +1,428 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Lightbulb, BarChart2, Calendar, Target, Leaf, ChevronDown, ChevronUp } from 'lucide-react';
-
-const NAV_GREEN = '#236144';
-const LIGHT_GREEN = '#9CD49E';
-const DARK_FOOTER = '#1B2B23';
-
-const features = [
-  { icon: <Bell size={28} color={NAV_GREEN} />, title: 'Smart Alerts', desc: 'Receive instant alerts when your usage goes above your normal level.' },
-  { icon: <Lightbulb size={28} color={NAV_GREEN} />, title: 'AI Saving Tips', desc: 'Our AI watches your usage patterns to help you find easy ways to save.' },
-  { icon: <BarChart2 size={28} color={NAV_GREEN} />, title: 'Usage Analytics', desc: 'View detailed analytics on your electricity usage and spot trends easily.' },
-  { icon: <Calendar size={28} color={NAV_GREEN} />, title: 'Smart Scheduling', desc: 'Schedule appliances to run at off-peak hours to save money automatically.' },
-  { icon: <Target size={28} color={NAV_GREEN} />, title: 'Budget Goals', desc: 'Set a monthly electricity budget and track your progress toward it.' },
-  { icon: <Leaf size={28} color={NAV_GREEN} />, title: 'Carbon Footprint', desc: 'See your CO2 impact and strive to cut it by 15% off the national average.' },
-];
-
-const faqs = [
-  { q: 'What devices does SmartSurge work with?', a: 'SmartSurge works with most smart plugs, smart meters, and home automation systems.' },
-  { q: 'Is my data private?', a: 'Yes. Your data is encrypted and stored securely. Only you know where it is stored and who can see it.' },
-  { q: 'Is SmartSurge free?', a: 'We offer a free tier with basic features. Check our pricing for full details.' },
-  { q: 'How accurate is the bill estimate?', a: 'We use your tariff and consumption data to give a customised cost estimate.' },
-];
-
-const steps = [
-  { num: '1', title: 'Connect', desc: 'Link your smart home devices to SmartSurge in minutes.' },
-  { num: '2', title: 'Monitor', desc: 'See your live power and estimated bill update in real-time.' },
-  { num: '3', title: 'Control & Save', desc: 'Switch on schedules and goals and follow tips to use less.' },
-];
-
-const statCards = [
-  { label: 'Live Power', value: '1.84 kW', sub: 'Right now' },
-  { label: 'Estimated Bill', value: 'Rs. 8,420', sub: 'Know your bill before it lands.' },
-  { label: 'Active Devices', value: 'AC, Fridge, Router, Lights', sub: 'Active now' },
-];
+import { 
+  Bell, 
+  Sparkles, 
+  BarChart3, 
+  Calendar, 
+  Target, 
+  Leaf, 
+  ChevronDown, 
+  ChevronUp, 
+  ArrowRight,
+  CheckCircle2,
+  Zap,
+  Activity,
+  ShieldCheck
+} from 'lucide-react';
 
 export default function Landing() {
   const [openFaq, setOpenFaq] = useState(null);
+  const [activeTab, setActiveTab] = useState('Dashboard');
+
+  const features = [
+    { 
+      icon: <Bell className="w-5 h-5 text-[#18482f]" />, 
+      title: 'Smart Alerts', 
+      desc: "Get notified about usage spikes, overloads and when you're close to your bill limit." 
+    },
+    { 
+      icon: <Sparkles className="w-5 h-5 text-[#18482f]" />, 
+      title: 'AI Saving Tips', 
+      desc: 'Personalized suggestions like shifting heavy appliances to off-peak hours.' 
+    },
+    { 
+      icon: <BarChart3 className="w-5 h-5 text-[#18482f]" />, 
+      title: 'Usage Analytics', 
+      desc: 'Daily, weekly and monthly reports to see where your energy really goes.' 
+    },
+    { 
+      icon: <Calendar className="w-5 h-5 text-[#18482f]" />, 
+      title: 'Smart Scheduling', 
+      desc: 'Automate appliances to turn on and off by time, routine or tariff.' 
+    },
+    { 
+      icon: <Target className="w-5 h-5 text-[#18482f]" />, 
+      title: 'Budget Goals', 
+      desc: 'Set a monthly target and track your progress toward it.' 
+    },
+    { 
+      icon: <Leaf className="w-5 h-5 text-[#18482f]" />, 
+      title: 'Carbon Footprint', 
+      desc: "See your CO2 impact and how much you've reduced it." 
+    },
+  ];
+
+  const steps = [
+    {
+      num: '1 — Connect',
+      desc: 'Link your meter and home devices to SmartSurge in minutes.'
+    },
+    {
+      num: '2 — Monitor',
+      desc: 'Watch live power and your estimated bill update in real time.'
+    },
+    {
+      num: '3 — Control & save',
+      desc: 'Switch or schedule appliances and follow tips to cut waste.'
+    }
+  ];
+
+  const faqs = [
+    {
+      q: 'What devices does SmartSurge work with?',
+      a: 'SmartSurge works seamlessly with smart meters (like PZEM-004T, NodeMCU/ESP32) and popular IoT smart plugs. You can monitor whole-home consumption as well as individual heavy appliances.'
+    },
+    {
+      q: 'Is my data private?',
+      a: 'Yes, completely. Your telemetry and consumption data are securely stored and encrypted. You have full ownership of your data, and it is never shared with third parties.'
+    },
+    {
+      q: 'Is SmartSurge free?',
+      a: 'SmartSurge is 100% free to use for residential households during our open beta. You can monitor live wattage, track historical usage, and estimate bills without any hidden fees.'
+    },
+    {
+      q: 'How accurate is the bill estimate?',
+      a: 'Our billing engine uses the official Sri Lankan domestic slab tariffs (CEB/LECO), taking into account progressive block rates, peak/off-peak windows, and fixed monthly service charges for 98%+ accuracy.'
+    }
+  ];
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", color: '#1a1a1a', background: '#fff', margin: 0, padding: 0 }}>
+    <div className="min-h-screen bg-[#F8FAF6] text-[#1E2922] font-sans antialiased selection:bg-[#9CD49E] selection:text-white">
 
-      {/* Navbar */}
-      <nav style={{ background: NAV_GREEN, padding: '0 2rem', position: 'sticky', top: 0, zIndex: 100 }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <img src="/logo_transparent.png" alt="SmartSurge Logo" style={{ width: 38, height: 38, borderRadius: '50%', objectFit: 'contain', background: '#fff' }} />
-            <span style={{ color: '#fff', fontWeight: 700, fontSize: 18 }}>SmartSurge</span>
+      {/* TOP NAVIGATION (MATCHING FIGMA 1:1) */}
+      <header className="w-full flex items-stretch h-14 sm:h-16 bg-[#236144] shadow-sm z-50">
+        
+        {/* Left White Box with Brand Logo */}
+        <div className="bg-white px-4 sm:px-6 md:px-8 flex items-center justify-center border-r border-gray-100 flex-shrink-0">
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/brand-logo-full.png" 
+              alt="SmartSurge Logo" 
+              className="h-9 sm:h-11 w-auto object-contain" 
+            />
+          </Link>
+        </div>
+
+        {/* Right Green Bar with Nav Links & Buttons */}
+        <div className="flex-1 flex items-center justify-between px-3 sm:px-6 lg:px-10 overflow-x-auto no-scrollbar gap-2 sm:gap-4">
+          
+          {/* Navigation Links */}
+          <nav className="flex items-center gap-2 sm:gap-3">
+            <a 
+              href="#home" 
+              className="border border-white/80 bg-white/20 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition shadow-xs"
+            >
+              Home
+            </a>
+            <a 
+              href="#features" 
+              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+            >
+              Features
+            </a>
+            <a 
+              href="#about" 
+              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+            >
+              About us
+            </a>
+            <a 
+              href="#contact" 
+              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+            >
+              Contact
+            </a>
+          </nav>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <Link 
+              to="/register" 
+              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+            >
+              Register
+            </Link>
+            <Link 
+              to="/login" 
+              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+            >
+              Login
+            </Link>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 32 }}>
-            {['Home', 'Features', 'About us', 'Contact'].map(link => (
-              <a key={link} href="#" style={{ color: '#d4f5e2', textDecoration: 'none', fontSize: 14, fontWeight: 500 }}>{link}</a>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <Link to="/register" style={{ padding: '9px 22px', background: '#fff', color: NAV_GREEN, borderRadius: 7, fontWeight: 700, fontSize: 13, textDecoration: 'none' }}>Register</Link>
-            <Link to="/login" style={{ padding: '9px 22px', background: 'transparent', color: '#fff', border: '1.5px solid #fff', borderRadius: 7, fontWeight: 600, fontSize: 13, textDecoration: 'none' }}>Login</Link>
+
+        </div>
+      </header>
+
+      {/* HERO SECTION (FIGMA DESIGN - FLUSH EDGE TO EDGE) */}
+      <section id="home" className="w-full relative overflow-hidden bg-white">
+        
+        {/* Full-width Hero Banner Artwork */}
+        <img 
+          src="/hero-banner.jpg" 
+          alt="Take control of every watt in your home" 
+          className="w-full h-auto block object-cover"
+        />
+
+        {/* Subtitle & Buttons Overlay (Always directly on the picture) */}
+        <div className="flex flex-col items-center text-center absolute left-[4%] sm:left-[6%] lg:left-[8%] top-[63%] sm:top-[65%] lg:top-[66%] w-[46%] sm:w-[42%] lg:w-[38%] z-10">
+          <p className="text-gray-600 text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-[260px] sm:max-w-sm">
+            Monitor live power, predict your bill and control appliances<br className="hidden sm:inline" /> from one calm, simple dashboard.
+          </p>
+          <div className="flex items-center justify-center gap-1.5 sm:gap-3">
+            <Link
+              to="/register"
+              className="bg-[#236144] hover:bg-[#1a4a34] text-white px-2.5 sm:px-5 lg:px-6 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-md flex items-center gap-1 transition duration-150"
+            >
+              <span>Get Started</span>
+              <span className="text-amber-300 text-[10px] sm:text-xs">⚡</span>
+            </Link>
+            <a
+              href="#how"
+              className="bg-white hover:bg-gray-50 border border-gray-400 text-gray-800 px-2.5 sm:px-4 lg:px-5 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-medium shadow-sm flex items-center gap-1 transition duration-150"
+            >
+              <span>See how it works</span>
+              <span className="text-[8px] sm:text-[10px]">▶</span>
+            </a>
           </div>
         </div>
-      </nav>
 
-      {/* Hero — background image only */}
-      <section style={{ position: 'relative', minHeight: 520, overflow: 'hidden' }}>
-        <img
-          src="/bg-smarthome.jpg"
-          alt="Smart Home"
-          style={{ width: '100%', height: '520px', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-        />
       </section>
 
-      {/* Hero subtitle + CTA buttons */}
-      <section style={{ background: '#f0f8f1', padding: '48px 2rem', textAlign: 'center' }}>
-        <p style={{ fontSize: 18, color: '#3a5245', maxWidth: 560, margin: '0 auto 32px', lineHeight: 1.7 }}>
-          Monitor live power, predict your bill and control appliances from one calm, simple dashboard.
+      {/* SECTION 2: EVERYTHING YOU NEED TO SAVE ENERGY */}
+      <section id="features" className="bg-[#9CD49E] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
+            Everything you need to save energy
+          </h2>
+          <p className="text-[#19432B] text-sm sm:text-base font-normal mb-12 max-w-xl mx-auto">
+            Simple tools that make your home use less and cost less.
+          </p>
+
+          {/* 6 Feature Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+            {features.map((f, i) => (
+              <div 
+                key={i} 
+                className="bg-white rounded-2xl p-5 text-center flex flex-col items-center justify-start shadow-sm border border-white/60 hover:shadow-md hover:-translate-y-1 transition duration-200"
+              >
+                <div className="w-12 h-12 rounded-full bg-[#EBF5ED] flex items-center justify-center mb-4">
+                  {f.icon}
+                </div>
+                <h3 className="font-serif text-[#113621] font-bold text-sm mb-2 leading-snug">
+                  {f.title}
+                </h3>
+                <p className="text-gray-500 text-xs leading-relaxed">
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 3: HOW IT WORKS */}
+      <section id="how" className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
+          How it works
+        </h2>
+        <p className="text-gray-600 text-sm sm:text-base mb-12">
+          Three simple steps from setup to savings.
         </p>
-        <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
+
+        {/* 3 Step Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          {steps.map((s, idx) => (
+            <div 
+              key={idx} 
+              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#D5E4D8] shadow-sm hover:shadow-md transition duration-200"
+            >
+              <h3 className="font-serif text-lg font-bold text-[#113621] mb-2.5">
+                {s.num}
+              </h3>
+              <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 4: YOUR HOME, AT A GLANCE (LIVE DASHBOARD PREVIEW) */}
+      <section className="bg-[#9CD49E] py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto text-center">
+          
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
+            Your home, at a glance
+          </h2>
+          <p className="text-[#19432B] text-sm sm:text-base mb-10">
+            A clean dashboard with the numbers that matter.
+          </p>
+
+          {/* Interactive Mockup Container */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 text-left max-w-4xl mx-auto">
+            
+            {/* Mockup Tabs */}
+            <div className="flex items-center gap-6 border-b border-gray-100 pb-4 mb-6 text-xs sm:text-sm">
+              {['Dashboard', 'Live Power', 'Appliances', 'Billing'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`font-medium transition pb-1 ${
+                    activeTab === tab 
+                      ? 'text-[#123924] font-bold border-b-2 border-[#123924]' 
+                      : 'text-gray-400 hover:text-gray-700'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              
+              {/* Metric 1 */}
+              <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
+                <span className="block text-[11px] font-medium text-gray-500 mb-1">Live Power</span>
+                <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">1.84 kW</span>
+                <div className="border-t border-gray-200/60 pt-3">
+                  <span className="block text-xs font-semibold text-gray-700">Real-time monitoring</span>
+                  <span className="block text-[11px] text-gray-500">See usage as it happens.</span>
+                </div>
+              </div>
+
+              {/* Metric 2 */}
+              <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
+                <span className="block text-[11px] font-medium text-gray-500 mb-1">Estimated Bill</span>
+                <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">Rs. 8,420</span>
+                <div className="border-t border-gray-200/60 pt-3">
+                  <span className="block text-xs font-semibold text-gray-700">Bill prediction</span>
+                  <span className="block text-[11px] text-gray-500">Know your cost before it lands.</span>
+                </div>
+              </div>
+
+              {/* Metric 3 */}
+              <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
+                <span className="block text-[11px] font-medium text-gray-500 mb-1">Quick Controls</span>
+                <span className="block text-sm font-semibold text-[#113621] mb-5 truncate">
+                  Air Conditioner, Water Heater, Lights
+                </span>
+                <div className="border-t border-gray-200/60 pt-3">
+                  <span className="block text-xs font-semibold text-gray-700">Remote control</span>
+                  <span className="block text-[11px] text-gray-500">Manage appliances from anywhere.</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Privacy Tag */}
+            <div className="bg-[#EEF7F1] border border-[#D7EBDC] rounded-xl px-4 py-2.5 flex items-center gap-2 text-xs text-[#133C24]">
+              <CheckCircle2 className="w-4 h-4 text-[#1E5735]" />
+              <span>Private by design — Your usage data stays yours.</span>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 5: FREQUENTLY ASKED QUESTIONS */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight text-center mb-12">
+          Frequently Asked Questions
+        </h2>
+
+        <div className="flex flex-col gap-3.5">
+          {faqs.map((f, i) => (
+            <div 
+              key={i} 
+              className="bg-white rounded-2xl border border-[#D5E4D8] overflow-hidden shadow-sm transition"
+            >
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif font-bold text-sm sm:text-base text-[#113621] hover:text-[#18482F] transition"
+              >
+                <span>{f.q}</span>
+                {openFaq === i ? (
+                  <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                )}
+              </button>
+              {openFaq === i && (
+                <div className="px-6 pb-5 pt-1 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-100">
+                  {f.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 6: CALL TO ACTION */}
+      <section className="bg-[#9CD49E] py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto bg-white rounded-3xl p-8 sm:p-12 text-center shadow-md border border-white/80">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#113621] font-bold tracking-tight mb-3">
+            Start managing your energy today
+          </h2>
+          <p className="text-gray-600 text-xs sm:text-sm mb-7 max-w-md mx-auto">
+            Create your free account and see your home's power in minutes.
+          </p>
           <Link
             to="/register"
-            style={{ padding: '14px 32px', background: NAV_GREEN, color: '#fff', borderRadius: 50, fontWeight: 700, textDecoration: 'none', fontSize: 15, display: 'flex', alignItems: 'center', gap: 8 }}
+            className="inline-flex items-center gap-2 bg-[#153B27] hover:bg-[#0E291B] text-white px-8 py-3 rounded-full text-sm font-semibold shadow-md transition duration-200"
           >
-            Get Started <span style={{ fontSize: 18 }}>⚡</span>
+            <span>Get Started</span>
+            <Zap className="w-4 h-4 fill-amber-300 text-amber-300" />
           </Link>
-          <a
-            href="#how"
-            style={{ padding: '14px 32px', background: 'transparent', color: NAV_GREEN, border: `2px solid ${NAV_GREEN}`, borderRadius: 50, fontWeight: 600, textDecoration: 'none', fontSize: 15, display: 'flex', alignItems: 'center', gap: 8 }}
-          >
-            See how it works <span style={{ fontSize: 14 }}>&#9658;</span>
-          </a>
         </div>
       </section>
 
-      {/* Features */}
-      <section style={{ background: '#f5fbf6', padding: '70px 2rem' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 30, fontWeight: 800, marginBottom: 8, color: '#111' }}>Everything you need to save energy</h2>
-          <p style={{ textAlign: 'center', color: '#666', marginBottom: 44, fontSize: 15 }}>Simple tools that make your home use less and cost less.</p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 20 }}>
-            {features.map(f => (
-              <div key={f.title} style={{ background: '#fff', borderRadius: 14, padding: '24px 20px', boxShadow: '0 2px 16px rgba(35,97,68,0.07)', border: `1px solid ${LIGHT_GREEN}` }}>
-                <div style={{ marginBottom: 14 }}>{f.icon}</div>
-                <h4 style={{ fontWeight: 700, fontSize: 15, marginBottom: 8, color: '#111' }}>{f.title}</h4>
-                <p style={{ color: '#666', fontSize: 13, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section id="how" style={{ background: '#fff', padding: '70px 2rem' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 30, fontWeight: 800, marginBottom: 8, color: '#111' }}>How it works</h2>
-          <p style={{ textAlign: 'center', color: '#666', marginBottom: 52, fontSize: 15 }}>Three simple steps from set-up to savings.</p>
-          <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap', justifyContent: 'center' }}>
-            {steps.map(s => (
-              <div key={s.num} style={{ flex: 1, minWidth: 220, maxWidth: 320, textAlign: 'center', padding: '36px 28px', borderRadius: 18, background: '#f7fdf9', border: `1.5px solid ${LIGHT_GREEN}` }}>
-                <div style={{ width: 52, height: 52, borderRadius: '50%', background: NAV_GREEN, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 22, margin: '0 auto 18px' }}>{s.num}</div>
-                <h4 style={{ fontWeight: 700, fontSize: 17, marginBottom: 10, color: '#111' }}>{s.title}</h4>
-                <p style={{ color: '#666', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Dashboard preview */}
-      <section style={{ background: `linear-gradient(135deg, ${NAV_GREEN} 0%, #3a9e5f 100%)`, padding: '70px 2rem', color: '#fff' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 30, fontWeight: 800, marginBottom: 8 }}>Your home, at a glance</h2>
-          <p style={{ textAlign: 'center', color: '#c8f0d4', marginBottom: 40, fontSize: 15 }}>A clean dashboard with the info you need most.</p>
-          <div style={{ background: 'rgba(255,255,255,0.13)', borderRadius: 20, padding: 28, border: '1px solid rgba(255,255,255,0.22)' }}>
-            <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
-              {['Dashboard', 'Live Power', 'Appliances', 'Billing'].map((t, i) => (
-                <span key={t} style={{ padding: '7px 18px', borderRadius: 20, background: i === 0 ? '#fff' : 'rgba(255,255,255,0.15)', color: i === 0 ? NAV_GREEN : '#e0f5e9', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}>{t}</span>
-              ))}
+      {/* FOOTER */}
+      <footer className="bg-[#123120] text-gray-300 py-14 px-4 sm:px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-[#214A33] pb-10">
+          
+          {/* Footer Logo & Tagline */}
+          <div className="max-w-sm">
+            <div className="flex items-center gap-2.5 mb-3">
+              <img 
+                src="/brand-icon.png" 
+                alt="SmartSurge Logo" 
+                className="h-9 w-auto object-contain brightness-110" 
+              />
+              <span className="font-serif text-xl font-bold tracking-tight text-white">
+                Smart<span className="text-[#D4AF37]">Surge</span>
+              </span>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
-              {statCards.map(c => (
-                <div key={c.label} style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 14, padding: '20px 22px' }}>
-                  <p style={{ fontSize: 12, color: '#b8eacc', margin: '0 0 6px' }}>{c.label}</p>
-                  <p style={{ fontSize: 24, fontWeight: 800, margin: '0 0 4px' }}>{c.value}</p>
-                  <p style={{ fontSize: 12, color: '#d4f5e2', margin: 0 }}>{c.sub}</p>
-                </div>
-              ))}
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Monitor live power, predict your bill and control appliances from one calm, simple dashboard.
+            </p>
+          </div>
+
+          {/* Footer Navigation Links */}
+          <div className="grid grid-cols-2 gap-10 text-xs">
+            <div className="flex flex-col gap-2.5">
+              <a href="#home" className="hover:text-white transition">Home</a>
+              <a href="#features" className="hover:text-white transition">Features</a>
+              <a href="#how" className="hover:text-white transition">How it works</a>
+            </div>
+            <div className="flex flex-col gap-2.5">
+              <a href="#" className="hover:text-white transition">FAQ</a>
+              <a href="#" className="hover:text-white transition">Contact</a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* FAQ */}
-      <section style={{ background: '#fff', padding: '70px 2rem' }}>
-        <div style={{ maxWidth: 740, margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: 30, fontWeight: 800, marginBottom: 8, color: '#111' }}>Frequently Asked Questions</h2>
-          <p style={{ textAlign: 'center', color: '#666', marginBottom: 40, fontSize: 15 }}>Quick answers to common questions.</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {faqs.map((f, i) => (
-              <div key={i} style={{ border: `1.5px solid ${openFaq === i ? NAV_GREEN : LIGHT_GREEN}`, borderRadius: 12, overflow: 'hidden' }}>
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{ width: '100%', background: openFaq === i ? '#f0faf4' : '#f9fefc', border: 'none', padding: '18px 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', fontWeight: 600, fontSize: 15, textAlign: 'left', color: '#111' }}
-                >
-                  {f.q}
-                  {openFaq === i ? <ChevronUp size={18} color={NAV_GREEN} /> : <ChevronDown size={18} color={NAV_GREEN} />}
-                </button>
-                {openFaq === i && (
-                  <div style={{ padding: '16px 22px', background: '#fff', fontSize: 14, color: '#555', borderTop: `1px solid ${LIGHT_GREEN}`, lineHeight: 1.7 }}>
-                    {f.a}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section style={{ background: NAV_GREEN, padding: '70px 2rem', textAlign: 'center', color: '#fff' }}>
-        <h2 style={{ fontSize: 32, fontWeight: 800, marginBottom: 14 }}>Start managing your energy today</h2>
-        <p style={{ color: '#c8f0d4', fontSize: 16, maxWidth: 480, margin: '0 auto 32px' }}>Create your free account and see your home power in minutes.</p>
-        <Link to="/register" style={{ display: 'inline-block', padding: '15px 36px', background: LIGHT_GREEN, color: NAV_GREEN, borderRadius: 9, fontWeight: 800, textDecoration: 'none', fontSize: 16 }}>
-          Get Started
-        </Link>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ background: DARK_FOOTER, color: '#aaa', padding: '48px 2rem 28px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 28 }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
-              <img src="/logo_transparent.png" alt="Logo" style={{ width: 34, height: 34, borderRadius: '50%', objectFit: 'contain' }} />
-              <span style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>SmartSurge</span>
-            </div>
-            <p style={{ fontSize: 13, maxWidth: 240, lineHeight: 1.7, margin: 0 }}>Monitor and control your home energy usage smartly.</p>
+        <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-gray-500 gap-3">
+          <span>© 2026 SmartSurge. All rights reserved.</span>
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
+            <a href="#" className="hover:text-gray-300 transition">Terms of Service</a>
           </div>
-          <div style={{ display: 'flex', gap: 48, flexWrap: 'wrap' }}>
-            {[['Home', 'Features', 'About us'], ['FAQ', 'Contact', 'Privacy']].map((col, i) => (
-              <ul key={i} style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {col.map(l => (
-                  <li key={l}><a href="#" style={{ color: '#aaa', textDecoration: 'none', fontSize: 13 }}>{l}</a></li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </div>
-        <div style={{ maxWidth: 1200, margin: '28px auto 0', borderTop: '1px solid #2e3d34', paddingTop: 18, fontSize: 12, color: '#555' }}>
-          2026 SmartSurge. All rights reserved.
         </div>
       </footer>
 

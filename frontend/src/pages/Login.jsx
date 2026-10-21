@@ -31,7 +31,7 @@ const Login = () => {
         
         {/* Logo */}
         <div className="flex justify-center mb-4">
-          <img src="/logo_transparent.png" alt="SmartSurge Logo" className="w-20 h-20 object-contain rounded-full" />
+          <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
         </div>
 
         {/* Headings */}

@@ -47,7 +47,7 @@ const Register = () => {
         
         {/* Logo */}
         <div className="flex justify-center mb-3">
-          <img src="/logo_transparent.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
+          <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
         </div>
 
         {/* Headings */}

@@ -17,7 +17,7 @@ const Sidebar = () => {
       
       {/* Logo Area */}
       <div className="mb-8 flex flex-col items-center justify-center mt-2">
-        <img src="/logo_transparent.png" alt="Logo" className="w-12 h-12 object-contain rounded-full shadow-[0_0_15px_rgba(251,191,36,0.3)]" />
+        <img src="/brand-icon.png" alt="Logo" className="w-12 h-12 object-contain rounded-full shadow-[0_0_15px_rgba(251,191,36,0.3)]" />
       </div>
 
       {/* Navigation Links */}
