@@ -11,7 +11,6 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
   
   const { register } = useContext(AuthContext);
@@ -21,10 +20,6 @@ const Register = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
-      return;
-    }
-    if (!agreeTerms) {
-      setError('You must agree to the Terms of Service');
       return;
     }
 
@@ -40,7 +35,7 @@ const Register = () => {
   return (
     <div 
       className="h-screen overflow-hidden bg-cover bg-center flex items-center justify-center lg:justify-end px-4 lg:px-24"
-      style={{ backgroundImage: "url('/bg-login.jpg')" }}
+      style={{ backgroundImage: "url('/bg-register.jpg')" }}
     >
       {/* Glassmorphism Register Panel */}
       <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
@@ -146,20 +141,6 @@ const Register = () => {
                 </button>
               </div>
             </div>
-          </div>
-
-          {/* Terms Checkbox */}
-          <div className="flex items-center gap-2 mt-1">
-            <input 
-              type="checkbox" 
-              id="terms" 
-              checked={agreeTerms}
-              onChange={(e) => setAgreeTerms(e.target.checked)}
-              className="w-3.5 h-3.5 rounded border-gray-400 text-amber-500 focus:ring-amber-500 bg-transparent"
-            />
-            <label htmlFor="terms" className="text-[11px] text-gray-300">
-              I agree to the Terms of Service
-            </label>
           </div>
 
           {/* Register Button */}
