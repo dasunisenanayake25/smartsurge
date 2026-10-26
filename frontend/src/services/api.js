@@ -4,7 +4,6 @@ const API = axios.create({
   baseURL: 'http://localhost:5000/api/v1',
 });
 
-// Request interceptor to attach JWT Token automatically
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -12,5 +11,20 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
+
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      const path = window.location.pathname;
+      if (path !== '/' && path !== '/login' && path !== '/register') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default API;
