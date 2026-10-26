@@ -4,6 +4,8 @@ import { AuthContext } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Appliances from './pages/Appliances';
+import History from './pages/History';
+import Reports from './pages/Reports';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -45,6 +47,20 @@ function App() {
           <ProtectedRoute>
             <DashboardLayout>
               <Appliances />
+            </DashboardLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/history" element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <History />
+            </DashboardLayout>
+          </ProtectedRoute>
+        } />
+        <Route path="/reports" element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <Reports />
             </DashboardLayout>
           </ProtectedRoute>
         } />
