@@ -11,9 +11,7 @@ import {
   ChevronUp, 
   ArrowRight,
   CheckCircle2,
-  Zap,
-  Activity,
-  ShieldCheck
+  Zap
 } from 'lucide-react';
 
 export default function Landing() {
@@ -90,24 +88,21 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#F8FAF6] text-[#1E2922] font-sans antialiased selection:bg-[#9CD49E] selection:text-white">
 
-      {/* TOP NAVIGATION (MATCHING FIGMA 1:1) */}
       <header className="w-full flex items-stretch h-14 sm:h-16 bg-[#236144] shadow-sm z-50">
-        
-        {/* Left White Box with Brand Logo */}
         <div className="bg-white px-4 sm:px-6 md:px-8 flex items-center justify-center border-r border-gray-100 flex-shrink-0">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center gap-2.5">
             <img 
-              src="/brand-logo-full.png" 
+              src="/brand-icon.png" 
               alt="SmartSurge Logo" 
-              className="h-9 sm:h-11 w-auto object-contain" 
+              className="h-8 sm:h-9 w-auto object-contain" 
             />
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-black">
+              Smart<span className="text-amber-400">Surge</span>
+            </span>
           </Link>
         </div>
 
-        {/* Right Green Bar with Nav Links & Buttons */}
         <div className="flex-1 flex items-center justify-between px-3 sm:px-6 lg:px-10 overflow-x-auto no-scrollbar gap-2 sm:gap-4">
-          
-          {/* Navigation Links */}
           <nav className="flex items-center gap-2 sm:gap-3">
             <a 
               href="#home" 
@@ -135,7 +130,6 @@ export default function Landing() {
             </a>
           </nav>
 
-          {/* Action Buttons */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <Link 
               to="/register" 
@@ -150,21 +144,16 @@ export default function Landing() {
               Login
             </Link>
           </div>
-
         </div>
       </header>
 
-      {/* HERO SECTION (FIGMA DESIGN - FLUSH EDGE TO EDGE) */}
       <section id="home" className="w-full relative overflow-hidden bg-white">
-        
-        {/* Full-width Hero Banner Artwork */}
         <img 
           src="/hero-banner.jpg" 
           alt="Take control of every watt in your home" 
           className="w-full h-auto block object-cover"
         />
 
-        {/* Subtitle & Buttons Overlay (Always directly on the picture) */}
         <div className="flex flex-col items-center text-center absolute left-[4%] sm:left-[6%] lg:left-[8%] top-[63%] sm:top-[65%] lg:top-[66%] w-[46%] sm:w-[42%] lg:w-[38%] z-10">
           <p className="text-gray-600 text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-[260px] sm:max-w-sm">
             Monitor live power, predict your bill and control appliances<br className="hidden sm:inline" /> from one calm, simple dashboard.
@@ -172,27 +161,24 @@ export default function Landing() {
           <div className="flex items-center justify-center gap-1.5 sm:gap-3">
             <Link
               to="/register"
-              className="bg-[#236144] hover:bg-[#1a4a34] text-white px-2.5 sm:px-5 lg:px-6 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-md flex items-center gap-1 transition duration-150"
+              className="bg-[#236144] hover:bg-[#1a4a34] text-white px-2.5 sm:px-5 lg:px-6 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-md flex items-center gap-1.5 transition duration-150"
             >
               <span>Get Started</span>
-              <span className="text-amber-300 text-[10px] sm:text-xs">⚡</span>
+              <Zap className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
             </Link>
             <a
               href="#how"
-              className="bg-white hover:bg-gray-50 border border-gray-400 text-gray-800 px-2.5 sm:px-4 lg:px-5 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-medium shadow-sm flex items-center gap-1 transition duration-150"
+              className="bg-white hover:bg-gray-50 border border-gray-400 text-gray-800 px-2.5 sm:px-4 lg:px-5 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-medium shadow-sm flex items-center gap-1.5 transition duration-150"
             >
               <span>See how it works</span>
-              <span className="text-[8px] sm:text-[10px]">▶</span>
+              <ArrowRight className="w-3 h-3 text-gray-700" />
             </a>
           </div>
         </div>
-
       </section>
 
-      {/* SECTION 2: EVERYTHING YOU NEED TO SAVE ENERGY */}
       <section id="features" className="bg-[#9CD49E] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          
           <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
             Everything you need to save energy
           </h2>
@@ -200,7 +186,6 @@ export default function Landing() {
             Simple tools that make your home use less and cost less.
           </p>
 
-          {/* 6 Feature Cards */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
             {features.map((f, i) => (
               <div 
@@ -219,11 +204,9 @@ export default function Landing() {
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* SECTION 3: HOW IT WORKS */}
       <section id="how" className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
         <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
           How it works
@@ -232,7 +215,6 @@ export default function Landing() {
           Three simple steps from setup to savings.
         </p>
 
-        {/* 3 Step Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
           {steps.map((s, idx) => (
             <div 
@@ -250,10 +232,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION 4: YOUR HOME, AT A GLANCE (LIVE DASHBOARD PREVIEW) */}
       <section className="bg-[#9CD49E] py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
-          
           <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
             Your home, at a glance
           </h2>
@@ -261,10 +241,7 @@ export default function Landing() {
             A clean dashboard with the numbers that matter.
           </p>
 
-          {/* Interactive Mockup Container */}
           <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 text-left max-w-4xl mx-auto">
-            
-            {/* Mockup Tabs */}
             <div className="flex items-center gap-6 border-b border-gray-100 pb-4 mb-6 text-xs sm:text-sm">
               {['Dashboard', 'Live Power', 'Appliances', 'Billing'].map((tab) => (
                 <button
@@ -281,10 +258,7 @@ export default function Landing() {
               ))}
             </div>
 
-            {/* Metrics Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              
-              {/* Metric 1 */}
               <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
                 <span className="block text-[11px] font-medium text-gray-500 mb-1">Live Power</span>
                 <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">1.84 kW</span>
@@ -294,7 +268,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* Metric 2 */}
               <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
                 <span className="block text-[11px] font-medium text-gray-500 mb-1">Estimated Bill</span>
                 <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">Rs. 8,420</span>
@@ -304,7 +277,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* Metric 3 */}
               <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
                 <span className="block text-[11px] font-medium text-gray-500 mb-1">Quick Controls</span>
                 <span className="block text-sm font-semibold text-[#113621] mb-5 truncate">
@@ -315,21 +287,16 @@ export default function Landing() {
                   <span className="block text-[11px] text-gray-500">Manage appliances from anywhere.</span>
                 </div>
               </div>
-
             </div>
 
-            {/* Privacy Tag */}
             <div className="bg-[#EEF7F1] border border-[#D7EBDC] rounded-xl px-4 py-2.5 flex items-center gap-2 text-xs text-[#133C24]">
               <CheckCircle2 className="w-4 h-4 text-[#1E5735]" />
               <span>Private by design — Your usage data stays yours.</span>
             </div>
-
           </div>
-
         </div>
       </section>
 
-      {/* SECTION 5: FREQUENTLY ASKED QUESTIONS */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight text-center mb-12">
           Frequently Asked Questions
@@ -362,7 +329,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* SECTION 6: CALL TO ACTION */}
       <section className="bg-[#9CD49E] py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto bg-white rounded-3xl p-8 sm:p-12 text-center shadow-md border border-white/80">
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#113621] font-bold tracking-tight mb-3">
@@ -381,11 +347,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-[#123120] text-gray-300 py-14 px-4 sm:px-6 lg:px-12">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-[#214A33] pb-10">
-          
-          {/* Footer Logo & Tagline */}
           <div className="max-w-sm">
             <div className="flex items-center gap-2.5 mb-3">
               <img 
@@ -394,7 +357,7 @@ export default function Landing() {
                 className="h-9 w-auto object-contain brightness-110" 
               />
               <span className="font-serif text-xl font-bold tracking-tight text-white">
-                Smart<span className="text-[#D4AF37]">Surge</span>
+                Smart<span className="text-amber-400">Surge</span>
               </span>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed">
@@ -402,7 +365,6 @@ export default function Landing() {
             </p>
           </div>
 
-          {/* Footer Navigation Links */}
           <div className="grid grid-cols-2 gap-10 text-xs">
             <div className="flex flex-col gap-2.5">
               <a href="#home" className="hover:text-white transition">Home</a>
@@ -414,7 +376,6 @@ export default function Landing() {
               <a href="#" className="hover:text-white transition">Contact</a>
             </div>
           </div>
-
         </div>
 
         <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-gray-500 gap-3">

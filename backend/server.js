@@ -6,7 +6,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import applianceRoutes from './routes/applianceRoutes.js';
-import energyRoutes from './routes/energyRoutes.js'; // Added Energy Routes
+import energyRoutes from './routes/energyRoutes.js';
 import { startIoTSimulator } from './services/iotSimulator.js';
 
 dotenv.config();
@@ -14,7 +14,6 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Initialize Socket.io
 const io = new Server(server, {
   cors: {
     origin: '*',
@@ -22,10 +21,8 @@ const io = new Server(server, {
   },
 });
 
-// Connect Database
 connectDB();
 
-// Middlewares
 app.use(express.json());
 app.use(cors());
 
@@ -34,7 +31,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Socket.io Connection
 io.on('connection', (socket) => {
   console.log(`[Socket.io] Client Connected: ${socket.id}`);
   socket.on('disconnect', () => {
@@ -42,15 +38,12 @@ io.on('connection', (socket) => {
   });
 });
 
-// Start IoT Streamer
 startIoTSimulator(io);
 
-// API Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/appliances', applianceRoutes);
-app.use('/api/v1/energy', energyRoutes); // Mounted Energy Routes
+app.use('/api/v1/energy', energyRoutes);
 
-// Health Check Route
 app.get('/api/v1/health', (req, res) => {
   res.status(200).json({
     status: 'success',

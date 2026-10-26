@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Fingerprint, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -35,19 +35,15 @@ const Register = () => {
   return (
     <div 
       className="h-screen overflow-hidden bg-cover bg-center flex items-center justify-center lg:justify-end px-4 lg:px-24"
-      style={{ backgroundImage: "url('/bg-register.jpg')" }}
+      style={{ backgroundImage: "url('/bg-login.jpg')" }}
     >
-      {/* Glassmorphism Register Panel */}
       <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
-        
-        {/* Logo */}
         <div className="flex justify-center mb-3">
           <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
         </div>
 
-        {/* Headings */}
         <h2 className="text-2xl md:text-3xl text-white mb-2 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
-          Welcome to <br/> SmartSurge
+          Welcome to <br/> Smart<span className="text-amber-300">Surge</span>
         </h2>
         <p className="text-gray-200 text-xs md:text-sm mb-4 font-light">
           Create an account to manage your smart network.
@@ -58,8 +54,6 @@ const Register = () => {
         {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-3 text-xs border border-red-500/20">{error}</div>}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 text-left">
-          
-          {/* First Name & Last Name (Side by Side) */}
           <div className="flex flex-col sm:flex-row gap-3.5">
             <div className="flex-1">
               <label className="block text-[11px] text-gray-200 mb-1 ml-1">First Name</label>
@@ -85,7 +79,6 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Email Input */}
           <div>
             <label className="block text-[11px] text-gray-200 mb-1 ml-1">Your Email</label>
             <input 
@@ -98,7 +91,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Password & Confirm Password (Side by Side) */}
           <div className="flex flex-col sm:flex-row gap-3.5">
             <div className="flex-1">
               <label className="block text-[11px] text-gray-200 mb-1 ml-1">Password</label>
@@ -143,17 +135,14 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Register Button */}
           <button type="submit" className="w-full bg-[#1a1a1a] hover:bg-black text-gray-200 font-medium py-2.5 rounded-lg transition shadow-lg mt-1 border border-white/5 text-[13px]">
             Register
           </button>
         </form>
 
-        {/* Login Link */}
         <p className="mt-5 text-xs text-gray-300 font-light">
           Already have an account? <Link to="/login" className="text-gray-100 font-medium hover:text-amber-200 transition">Login</Link>
         </p>
-
       </div>
     </div>
   );
