@@ -26,6 +26,26 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 5000,
     },
+    cebAccountNo: {
+      type: String,
+      default: '074-819-2015-V',
+    },
+    houseType: {
+      type: String,
+      default: 'Two-Storey Residential',
+    },
+    residentsCount: {
+      type: Number,
+      default: 4,
+    },
+    solarSetup: {
+      type: String,
+      default: 'None',
+    },
+    district: {
+      type: String,
+      default: 'Colombo',
+    },
   },
   {
     timestamps: true,
