@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------- */
 /* 1. Reflow Sans DEMO - Extra Bold for Headings & Titles*/
-/* ---------------------------------------------------- */
 @font-face {
   font-family: 'Reflow Sans';
   src: url('/fonts/reflow-sans/Reflow Sans DEMO.ttf') format('truetype');
@@ -11,9 +9,6 @@
   font-display: swap;
 }
 
-/* ---------------------------------------------------- */
-/* 2. Gatilca Demo - Regular Font for Normal Text       */
-/* ---------------------------------------------------- */
 @font-face {
   font-family: 'Gatilca';
   src: url('/fonts/gatilca/GatilcaDemo-Regular.ttf') format('truetype');
@@ -56,9 +51,7 @@ li,
   font-family: 'Reflow Sans', sans-serif !important;
 }
 
-/* ---------------------------------------------------- */
 /* Apply Reflow Sans strictly to Bold & Larger Headings */
-/* ---------------------------------------------------- */
 h1, 
 h2, 
 h3, 
@@ -73,9 +66,7 @@ h3,
   letter-spacing: -0.02em;
 }
 
-/* ---------------------------------------------------- */
 /* LIGHT MODE EXPLICIT RULES (Default & html:not(.dark)) */
-/* ---------------------------------------------------- */
 html:not(.dark) {
   color-scheme: light;
 }
@@ -136,9 +127,7 @@ html:not(.dark) .bg-white .text-gray-500 {
   color: #6b7280 !important;
 }
 
-/* ---------------------------------------------------- */
 /* DARK MODE HIGH CONTRAST RULES                        */
-/* ---------------------------------------------------- */
 html.dark {
   color-scheme: dark;
 }
