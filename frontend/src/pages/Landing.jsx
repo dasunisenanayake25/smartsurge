@@ -94,15 +94,15 @@ export default function Landing() {
 
   const steps = [
     {
-      num: '1 — Connect',
+      num: '1. Connect',
       desc: 'Link your meter and home devices to SmartSurge in minutes.'
     },
     {
-      num: '2 — Monitor',
+      num: '2. Monitor',
       desc: 'Watch live power and your estimated bill update in real time.'
     },
     {
-      num: '3 — Control & save',
+      num: '3. Control & save',
       desc: 'Switch or schedule appliances and follow tips to cut waste.'
     }
   ];
@@ -273,7 +273,7 @@ export default function Landing() {
           {steps.map((s, idx) => (
             <div 
               key={idx} 
-              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#D5E4D8] shadow-sm hover:shadow-md transition duration-200"
+              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#D5E4D8] shadow-sm hover:border-emerald-500 hover:ring-4 hover:ring-emerald-400/35 hover:shadow-[0_0_22px_rgba(16,185,129,0.35),0_12px_24px_-4px_rgba(18,54,33,0.12)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
             >
               <h3 className="font-serif text-lg font-bold text-[#113621] mb-2.5">
                 {s.num}
@@ -448,17 +448,19 @@ export default function Landing() {
           {faqs.map((f, i) => (
             <div 
               key={i} 
-              className="bg-white rounded-2xl border border-[#D5E4D8] overflow-hidden shadow-sm transition"
+              className={`bg-white rounded-2xl border transition-all duration-300 shadow-sm hover:border-emerald-500 hover:ring-4 hover:ring-emerald-400/35 hover:shadow-[0_0_22px_rgba(16,185,129,0.35),0_10px_20px_-4px_rgba(18,54,33,0.1)] hover:-translate-y-0.5 overflow-hidden ${
+                openFaq === i ? 'border-emerald-500 ring-2 ring-emerald-400/25 shadow-md' : 'border-[#D5E4D8]'
+              }`}
             >
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif font-bold text-sm sm:text-base text-[#113621] hover:text-[#18482F] transition"
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif font-bold text-sm sm:text-base text-[#113621] hover:text-[#18482F] transition cursor-pointer"
               >
                 <span>{f.q}</span>
                 {openFaq === i ? (
-                  <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <ChevronUp className="w-4 h-4 text-emerald-600 flex-shrink-0 transition-transform" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                  <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform" />
                 )}
               </button>
               {openFaq === i && (
