@@ -14,7 +14,9 @@ import {
   ChevronUp, 
   ArrowRight,
   CheckCircle2,
-  Zap
+  Zap,
+  Phone,
+  Mail
 } from 'lucide-react';
 
 export default function Landing() {
@@ -504,14 +506,33 @@ export default function Landing() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs">
             <div className="flex flex-col gap-2.5">
+              <span className="text-[11px] font-bold text-gray-200 uppercase tracking-wider mb-1">Navigation</span>
               <a href="#home" className="hover:text-white transition">Home</a>
               <a href="#features" className="hover:text-white transition">Features</a>
               <a href="#how" className="hover:text-white transition">How it works</a>
             </div>
             <div className="flex flex-col gap-2.5">
+              <span className="text-[11px] font-bold text-gray-200 uppercase tracking-wider mb-1">Support</span>
               <a href="#faq" className="hover:text-white transition">FAQ</a>
+              <a href="mailto:support@smartsurge.lk" className="hover:text-white transition flex items-center gap-1.5">
+                <Mail size={13} className="text-amber-400" />
+                <span>support@smartsurge.lk</span>
+              </a>
+            </div>
+            <div className="col-span-2 sm:col-span-1 flex flex-col gap-2.5">
+              <span className="text-[11px] font-bold text-gray-200 uppercase tracking-wider mb-1">Contact Us</span>
+              <a 
+                href="tel:+94112345678" 
+                className="hover:text-amber-300 transition flex items-center gap-2 text-white font-semibold"
+              >
+                <div className="w-6 h-6 rounded-full bg-[#1e4d34] flex items-center justify-center text-amber-400 flex-shrink-0">
+                  <Phone size={12} />
+                </div>
+                <span>+94 11 234 5678</span>
+              </a>
+              <span className="text-[10px] text-gray-400">Mon - Fri: 8:30 AM - 5:30 PM</span>
             </div>
           </div>
         </div>
