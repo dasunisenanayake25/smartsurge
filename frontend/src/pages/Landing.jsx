@@ -130,14 +130,14 @@ export default function Landing() {
     <div className="min-h-screen bg-[#F8FAF6] text-[#1E2922] font-sans antialiased selection:bg-[#9CD49E] selection:text-white">
 
       <header className="w-full flex items-stretch h-14 sm:h-16 bg-[#236144] shadow-sm z-50">
-        <div className="bg-white px-4 sm:px-6 md:px-8 flex items-center justify-center border-r border-gray-100 flex-shrink-0">
+        <div className="bg-[#236144] px-4 sm:px-6 md:px-8 flex items-center justify-center flex-shrink-0">
           <Link to="/" className="flex items-center gap-2.5">
             <img 
               src="/brand-icon.png" 
               alt="SmartSurge Logo" 
-              className="h-8 sm:h-9 w-auto object-contain" 
+              className="h-8 sm:h-9 w-auto object-contain brightness-110" 
             />
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-black">
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white">
               Smart<span className="text-amber-400">Surge</span>
             </span>
           </Link>
