@@ -168,7 +168,7 @@ const Dashboard = () => {
             Smart Dashboard
           </h1>
           <p className="text-gray-500 mt-0.5 font-medium text-xs md:text-sm">
-            Welcome back, <span className="text-[#236144] font-semibold">{user?.name || 'Home Owner'}</span>
+            Welcome back, <span className="text-[#10331e] dark:text-[#0b2415] font-bold">{user?.name || 'Home Owner'}</span>
           </p>
         </div>
 
