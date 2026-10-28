@@ -193,7 +193,7 @@ export default function Landing() {
         />
 
         <div className="flex flex-col items-center text-center absolute left-[4%] sm:left-[6%] lg:left-[8%] top-[63%] sm:top-[65%] lg:top-[66%] w-[46%] sm:w-[42%] lg:w-[38%] z-10">
-          <p className="text-gray-600 text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-[260px] sm:max-w-sm">
+          <p className="text-gray-700 dark:text-gray-900 font-medium text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-[260px] sm:max-w-sm">
             Monitor live power, predict your bill and control appliances<br className="hidden sm:inline" /> from one calm, simple dashboard.
           </p>
           <div className="flex items-center justify-center gap-1.5 sm:gap-3">
@@ -205,10 +205,10 @@ export default function Landing() {
             </Link>
             <a
               href="#how"
-              className="bg-white hover:bg-gray-50 border border-gray-400 text-gray-800 px-2.5 sm:px-4 lg:px-5 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-medium shadow-sm flex items-center gap-1.5 transition duration-150"
+              className="bg-white/90 hover:bg-white border border-gray-400 text-gray-900 px-2.5 sm:px-4 lg:px-5 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-sm flex items-center gap-1.5 transition duration-150"
             >
               <span>See how it works</span>
-              <ArrowRight className="w-3 h-3 text-gray-700" />
+              <ArrowRight className="w-3 h-3 text-gray-800" />
             </a>
           </div>
         </div>
