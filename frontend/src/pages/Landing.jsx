@@ -158,7 +158,7 @@ export default function Landing() {
               Features
             </a>
             <a 
-              href="#about" 
+              href="#faq" 
               className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
             >
               About us
@@ -432,7 +432,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto scroll-mt-24">
         <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight text-center mb-12">
           Frequently Asked Questions
         </h2>
@@ -508,8 +508,7 @@ export default function Landing() {
               <a href="#how" className="hover:text-white transition">How it works</a>
             </div>
             <div className="flex flex-col gap-2.5">
-              <a href="#" className="hover:text-white transition">FAQ</a>
-              <a href="#" className="hover:text-white transition">Contact</a>
+              <a href="#faq" className="hover:text-white transition">FAQ</a>
             </div>
           </div>
         </div>
