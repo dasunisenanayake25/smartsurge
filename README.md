@@ -124,6 +124,12 @@ npm run dev
 # Server will run on http://localhost:5000
 ```
 
+Run Automated Backend Unit Tests:
+```bash
+npm test
+# Executes all test suites in tests/ folder (Auth, Appliances, Tariff slabs)
+```
+
 ### 3. Frontend Setup
 Open a new terminal:
 ```bash
