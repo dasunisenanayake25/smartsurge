@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Appliance from '../models/Appliance.js';
 import jwt from 'jsonwebtoken';
 
 const generateToken = (id) => {
@@ -50,7 +51,40 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
+
+    // Auto-create or fix Demo Account seamlessly
+    if (email === 'demo@smartsurge.com' && password === '123456') {
+      if (!user) {
+        user = await User.create({
+          name: 'Kasun Perera',
+          email: 'demo@smartsurge.com',
+          password: '123456',
+          monthlyBudget: 6500,
+          cebAccountNo: '074-819-2015-V',
+          houseType: 'Two-Storey Residential',
+          residentsCount: 4,
+          solarSetup: 'None',
+          district: 'Colombo',
+        });
+      } else if (!(await user.matchPassword(password))) {
+        user.password = '123456';
+        await user.save();
+      }
+
+      // Ensure demo appliances exist
+      const appCount = await Appliance.countDocuments({ userId: user._id });
+      if (appCount === 0) {
+        await Appliance.insertMany([
+          { userId: user._id, name: 'Master Bedroom Inverter AC', category: 'AC', ratedWattage: 1200, status: 'ON', isSmartPlugConnected: true },
+          { userId: user._id, name: 'Smart Inverter Refrigerator', category: 'Refrigerator', ratedWattage: 180, status: 'ON', isSmartPlugConnected: true },
+          { userId: user._id, name: 'Living Room 55" 4K Smart TV', category: 'TV', ratedWattage: 110, status: 'ON', isSmartPlugConnected: true },
+          { userId: user._id, name: 'Automatic Washing Machine', category: 'Washing Machine', ratedWattage: 500, status: 'OFF', isSmartPlugConnected: true },
+          { userId: user._id, name: 'Kitchen Microwave Oven', category: 'Other', ratedWattage: 1150, status: 'OFF', isSmartPlugConnected: true },
+          { userId: user._id, name: 'LED Corridor & Ambient Lighting', category: 'Lighting', ratedWattage: 75, status: 'ON', isSmartPlugConnected: true },
+        ]);
+      }
+    }
 
     if (user && (await user.matchPassword(password))) {
       return res.status(200).json({

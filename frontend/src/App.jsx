@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 import Sidebar from './components/Sidebar';
+import SurgeToast from './components/SurgeToast';
 import Dashboard from './pages/Dashboard';
 import Appliances from './pages/Appliances';
 import History from './pages/History';
@@ -22,6 +23,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <div className="flex h-screen overflow-hidden bg-white">
       <Sidebar />
+      <SurgeToast />
       <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAF6]">
         <main className="flex-1 overflow-hidden relative">
           {children}

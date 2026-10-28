@@ -82,6 +82,24 @@ const Login = () => {
           <button type="submit" className="w-full bg-[#1a1a1a] hover:bg-black text-gray-200 font-medium py-3 rounded-lg transition shadow-lg mt-1 border border-white/5 text-sm">
             Login
           </button>
+
+          <button 
+            type="button" 
+            onClick={async () => {
+              setEmail('demo@smartsurge.com');
+              setPassword('123456');
+              setError('');
+              try {
+                await login('demo@smartsurge.com', '123456');
+                navigate('/dashboard');
+              } catch (err) {
+                setError(err.response?.data?.message || 'Demo login failed');
+              }
+            }}
+            className="w-full bg-amber-400/90 hover:bg-amber-400 text-black font-bold py-2.5 rounded-lg transition shadow-md border border-amber-300 text-xs flex items-center justify-center gap-1.5"
+          >
+            <span>⚡ One-Click Demo Login (Instant Access)</span>
+          </button>
         </form>
 
         <p className="mt-5 text-xs text-gray-300 font-light">

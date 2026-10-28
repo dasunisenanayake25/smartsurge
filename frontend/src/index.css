@@ -1,7 +1,74 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
+/* ---------------------------------------------------- */
+/* 1. Reflow Sans DEMO - Extra Bold for Headings & Titles*/
+/* ---------------------------------------------------- */
+@font-face {
+  font-family: 'Reflow Sans';
+  src: url('/fonts/reflow-sans/Reflow Sans DEMO.ttf') format('truetype');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------- */
+/* 2. Gatilca Demo - Regular Font for Normal Text       */
+/* ---------------------------------------------------- */
+@font-face {
+  font-family: 'Gatilca';
+  src: url('/fonts/gatilca/GatilcaDemo-Regular.ttf') format('truetype');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Global ligature reset so demo font watermarks (e.g. [LTS]) are permanently suppressed */
+*, *::before, *::after {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "dlig" 0, "calt" 0 !important;
+}
+
+/* Set Gatilca as the primary default font for all normal text across the entire application */
+html,
+body,
+p,
+span,
+a,
+button,
+input,
+select,
+textarea,
+label,
+table,
+td,
+th,
+li,
+.font-sans {
+  font-family: 'Gatilca', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Utility classes */
+.font-gatilca {
+  font-family: 'Gatilca', sans-serif !important;
+}
+
+.font-reflow {
+  font-family: 'Reflow Sans', sans-serif !important;
+}
+
+/* ---------------------------------------------------- */
+/* Apply Reflow Sans strictly to Bold & Larger Headings */
+/* ---------------------------------------------------- */
+h1, 
+h2, 
+h3, 
+.font-serif,
+.font-heading,
+.font-bold.text-xl,
+.font-bold.text-2xl,
+.font-bold.text-3xl,
+.font-bold.text-4xl,
+.font-bold.text-5xl {
+  font-family: 'Reflow Sans', 'Gatilca', sans-serif !important;
+  letter-spacing: -0.02em;
 }
