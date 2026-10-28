@@ -72,18 +72,44 @@ erDiagram
 
 ---
 
-## Evaluation Criteria Mapping (EC4307 Rubric)
+## API Endpoints Reference
 
-| Rubric Criterion | Implementation Details | Endpoints / Components |
+All API routes are prefixed with `/api/v1` and protected via JWT Bearer authentication headers (except public Auth endpoints).
+
+### 1. Authentication & User Profile (`/api/v1/auth`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/v1/auth/register` | Public | Register a new user account with initial premises profile |
+| `POST` | `/api/v1/auth/login` | Public | Authenticate user credentials and return JWT bearer token |
+| `GET` | `/api/v1/auth/profile` | Private | Retrieve logged-in user profile, budget limits & preferences |
+| `PUT` | `/api/v1/auth/profile` | Private | Update monthly budget, tariff tier preferences, and password |
+
+### 2. Appliances Management - CRUD (`/api/v1/appliances`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/v1/appliances` | Private | Retrieve all registered household appliances with filter/sort |
+| `POST` | `/api/v1/appliances` | Private | Create a new appliance record with wattage & smart plug status |
+| `PUT` | `/api/v1/appliances/:id` | Private | Update appliance details, edit wattage, or toggle state (ON/OFF) |
+| `DELETE` | `/api/v1/appliances/:id` | Private | Safely remove an appliance and recalculate live load |
+
+### 3. Energy Telemetry & Billing Analytics (`/api/v1/energy`)
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/v1/energy/live` | Private | Get latest real-time telemetry snapshot (Watts, Volts, Amps) |
+| `GET` | `/api/v1/energy/history` | Private | Query historical telemetry logs by timeframe (`day`, `week`, `month`) |
+| `GET` | `/api/v1/energy/bill-estimate` | Private | Calculate progressive domestic CEB slab bill & breakdown |
+
+### 4. Health & System Diagnostics
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/v1/health` | Public | Verify server uptime, Socket.io gateway status, and timestamp |
+
+### 5. WebSocket Real-Time Events (`Socket.io`)
+| Event | Direction | Payload / Description |
 | :--- | :--- | :--- |
-| **Create (4 Marks)** | Add new smart appliances with validation (name, category, wattage, smart plug status). | `POST /api/appliances` <br/> `Appliances.jsx` |
-| **Read (4 Marks)** | List, search, category filter, and view real-time status of all registered appliances. | `GET /api/appliances` <br/> `Appliances.jsx`, `Dashboard.jsx` |
-| **Update (4 Marks)** | Real-time state toggling (ON/OFF), wattage editing, and threshold re-calibration. | `PUT /api/appliances/:id` <br/> `PUT /api/auth/profile` |
-| **Delete (4 Marks)** | Safe appliance removal with instant dashboard telemetry re-calculation. | `DELETE /api/appliances/:id` <br/> `Appliances.jsx` |
-| **Validation & Error Handling (2 Marks)** | Client-side reactive input validation + Server-side Mongoose schema & auth guards. | `authController.js`, `SurgeToast.jsx` |
-| **Database Design (4 Marks)** | Normalized schemas (`User`, `Appliance`, `EnergyLog`) with relational keys & indexes. | `backend/models/` |
-| **UI/UX & Responsiveness (2 Marks)** | Fully responsive layout (Mobile to Desktop), Dark/Light mode theme switch. | `ThemeToggle.jsx`, `index.css` |
-| **Code Quality (2 Marks)** | MVC pattern, modular REST structure, zero linting errors, Git version control. | Clean modular architecture |
+| `connection` | Client -> Server | Establishes persistent real-time duplex socket connection |
+| `energyUpdate` | Server -> Client | Broadcasts sub-second active power, voltage, and current stream |
+| `applianceToggled` | Server -> Client | Notifies active clients when a smart relay is toggled ON/OFF |
 
 ---
 
