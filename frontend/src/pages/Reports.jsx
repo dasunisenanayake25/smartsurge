@@ -294,9 +294,9 @@ export default function Reports() {
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-5 print:p-0 print:m-0">
       
       {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-4 flex-shrink-0">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Energy & Billing Reports
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
@@ -317,7 +317,7 @@ export default function Reports() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 flex-shrink-0">
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 block mb-1">Month-to-Date Usage</span>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {billData.consumedKwh} <span className="text-sm font-normal text-gray-500">kWh</span>
           </p>
           <span className="text-[11px] text-gray-500 mt-1 block font-medium">Accumulated household units</span>
@@ -325,7 +325,7 @@ export default function Reports() {
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 block mb-1">Current Month Cost</span>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             <span className="text-base font-sans text-[#236144] mr-1">Rs.</span>
             {totalCalculatedBill.toLocaleString()}
           </p>
@@ -346,7 +346,7 @@ export default function Reports() {
             <span className="text-xs font-semibold text-gray-500">Carbon Impact</span>
             <Leaf size={16} className="text-emerald-600" />
           </div>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {co2SavedKg} <span className="text-sm font-normal text-gray-500">kg</span>
           </p>
           <span className="text-[11px] text-emerald-600 font-semibold mt-1 block">CO₂ equivalent emissions</span>
@@ -361,7 +361,7 @@ export default function Reports() {
           <div>
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="text-base font-bold text-[#113621]">CEB/LECO Domestic Tariff Slab Breakdown</h3>
+                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">CEB/LECO Domestic Tariff Slab Breakdown</h3>
                 <p className="text-xs text-gray-500">Progressive block calculation as mandated by Sri Lanka CEB</p>
               </div>
               <span className="text-[11px] font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
@@ -421,7 +421,7 @@ export default function Reports() {
 
           <div className="mt-4 pt-3 border-t border-gray-200 flex items-center justify-between">
             <span className="text-xs font-semibold text-gray-600">Total Net Estimated Payable</span>
-            <span className="text-lg sm:text-xl font-bold font-mono text-[#113621]">
+            <span className="text-lg sm:text-xl font-bold font-mono text-[#113621] dark:text-emerald-100">
               Rs. {totalCalculatedBill.toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </span>
           </div>
@@ -430,7 +430,7 @@ export default function Reports() {
         {/* Right Col: Appliance Consumption Shares Pie Chart (5 cols) */}
         <div className="lg:col-span-5 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-bold text-[#113621]">Appliance Load Distribution</h3>
+            <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Appliance Load Distribution</h3>
             <p className="text-xs text-gray-500 mb-2">Percentage share of electricity consumed by key devices</p>
 
             <div className="w-full h-[220px]">
@@ -486,7 +486,7 @@ export default function Reports() {
               <Sparkles size={18} />
             </div>
             <div>
-              <h3 className="text-base font-bold text-[#113621]">AI Energy Saving & Tariff Optimization Engine</h3>
+              <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">AI Energy Saving & Tariff Optimization Engine</h3>
               <p className="text-xs text-gray-500">Live dynamic recommendations tailored to your current load and CEB domestic tariff</p>
             </div>
           </div>
@@ -512,14 +512,14 @@ export default function Reports() {
                 </span>
                 <timeRec.icon size={16} className={timeRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] mb-1">
+              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
                 {timeRec.title}
               </h4>
               <p className="text-xs text-gray-700 leading-relaxed">
                 {timeRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621]">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
               <TrendingDown size={14} className="text-emerald-600" />
               <span>{timeRec.metric}</span>
             </div>
@@ -534,14 +534,14 @@ export default function Reports() {
                 </span>
                 <slabRec.icon size={16} className={slabRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] mb-1">
+              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
                 {slabRec.title}
               </h4>
               <p className="text-xs text-gray-700 leading-relaxed">
                 {slabRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621]">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
               <AlertCircle size={14} className={slabRec.iconColor} />
               <span>{slabRec.metric}</span>
             </div>
@@ -556,14 +556,14 @@ export default function Reports() {
                 </span>
                 <loadRec.icon size={16} className={loadRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] mb-1">
+              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
                 {loadRec.title}
               </h4>
               <p className="text-xs text-gray-700 leading-relaxed">
                 {loadRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621]">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
               <ShieldCheck size={14} className={loadRec.iconColor} />
               <span>{loadRec.action}</span>
             </div>

@@ -122,9 +122,9 @@ export default function Settings() {
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-6">
       
       {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-4 flex-shrink-0">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             System & Energy Settings
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
@@ -161,7 +161,7 @@ export default function Settings() {
       </header>
 
       {/* Settings Navigation Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-gray-200 scrollbar-none">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -196,7 +196,7 @@ export default function Settings() {
               <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm">
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <h3 className="text-base font-bold text-[#113621]">Monthly Electricity Budget Target</h3>
+                    <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Monthly Electricity Budget Target</h3>
                     <p className="text-xs text-gray-500">Define maximum allowable electricity expenditure before triggering warning notifications</p>
                   </div>
                   <div className="p-2 bg-emerald-50 text-emerald-700 rounded-xl">
@@ -258,7 +258,7 @@ export default function Settings() {
 
               {/* Automated Demand-Side Management (DSM) Toggles */}
               <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
-                <h3 className="text-base font-bold text-[#113621]">Smart Demand-Side Automation Rules</h3>
+                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Smart Demand-Side Automation Rules</h3>
 
                 <div className="flex items-center justify-between p-3.5 bg-[#F8FAF6] border border-[#E3EDE5] rounded-xl">
                   <div className="flex items-start gap-3">
@@ -333,7 +333,7 @@ export default function Settings() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-8 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-5">
               <div>
-                <h3 className="text-base font-bold text-[#113621]">Utility Provider & Tariff Slab Architecture</h3>
+                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Utility Provider & Tariff Slab Architecture</h3>
                 <p className="text-xs text-gray-500">Sri Lankan domestic block tariff rates used for calculating bills and projected expenditure</p>
               </div>
 
@@ -456,7 +456,7 @@ export default function Settings() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-8 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-5">
               <div>
-                <h3 className="text-base font-bold text-[#113621]">IoT Telemetry Gateway & Smart Meter Setup</h3>
+                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">IoT Telemetry Gateway & Smart Meter Setup</h3>
                 <p className="text-xs text-gray-500">Configure ESP32/PZEM-004T physical hardware meter or switch to software simulation loop</p>
               </div>
 
@@ -555,7 +555,7 @@ export default function Settings() {
 
             <div className="lg:col-span-4 flex flex-col gap-4">
               <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-3">
-                <h4 className="text-sm font-bold text-[#113621]">Hardware Architecture</h4>
+                <h4 className="text-sm font-bold text-[#113621] dark:text-emerald-100">Hardware Architecture</h4>
                 <ul className="text-xs text-gray-600 space-y-2 list-disc list-inside">
                   <li><strong>MCU:</strong> ESP32 Dual-Core 240MHz</li>
                   <li><strong>Sensor:</strong> PZEM-004T v3.0 (V, I, P, E)</li>
@@ -574,7 +574,7 @@ export default function Settings() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-8 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-5">
               <div>
-                <h3 className="text-base font-bold text-[#113621]">Grid Protection & Surge Trigger Thresholds</h3>
+                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Grid Protection & Surge Trigger Thresholds</h3>
                 <p className="text-xs text-gray-500">Define automated safeguards against hazardous line voltage spikes and circuit overloads</p>
               </div>
 

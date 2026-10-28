@@ -129,9 +129,9 @@ export default function History() {
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-5">
       
       {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-4 flex-shrink-0">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Energy Consumption History
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
@@ -155,7 +155,7 @@ export default function History() {
             <span className="text-xs font-semibold text-gray-500">Average Load</span>
             <Activity size={16} className="text-blue-600" />
           </div>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {avgWatt} <span className="text-sm font-normal text-gray-500">W</span>
           </p>
           <span className="text-[11px] text-gray-500 mt-1 block">Baseline running power</span>
@@ -188,7 +188,7 @@ export default function History() {
             <span className="text-xs font-semibold text-gray-500">Grid Voltage</span>
             <Gauge size={16} className="text-purple-600" />
           </div>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {avgVoltage} <span className="text-sm font-normal text-gray-500">V</span>
           </p>
           <span className="text-[11px] text-emerald-600 font-semibold mt-1 block">Stable CEB nominal line</span>
@@ -201,7 +201,7 @@ export default function History() {
         {/* Chart Toolbar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-base font-bold text-[#113621]">Historical Demand Analysis</h3>
+            <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Historical Demand Analysis</h3>
             <p className="text-xs text-gray-500">Continuous telemetry timeline across recorded IoT cycles</p>
           </div>
 
@@ -317,7 +317,7 @@ export default function History() {
         {/* Table Header Controls */}
         <div className="p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-base font-bold text-[#113621]">Telemetry Log Records</h3>
+            <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Telemetry Log Records</h3>
             <p className="text-xs text-gray-500">Chronological snapshot logs stored in MongoDB</p>
           </div>
 
@@ -356,7 +356,7 @@ export default function History() {
                       <div>{dateObj.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}</div>
                       <div className="text-[11px] text-gray-400 font-mono">{dateObj.toLocaleTimeString()}</div>
                     </td>
-                    <td className="py-3 px-4 font-mono font-bold text-[#113621]">
+                    <td className="py-3 px-4 font-mono font-bold text-[#113621] dark:text-emerald-100">
                       {Math.round(log.powerWatt)} W
                     </td>
                     <td className="py-3 px-4 font-mono">

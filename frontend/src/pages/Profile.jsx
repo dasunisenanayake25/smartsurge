@@ -139,9 +139,9 @@ export default function Profile() {
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-6">
       
       {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-4 flex-shrink-0">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Household Profile & Account
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
@@ -192,7 +192,7 @@ export default function Profile() {
           </div>
           <div>
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <h2 className="text-lg sm:text-xl font-bold text-[#113621]">{formData.name || 'User'}</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-[#113621] dark:text-emerald-100">{formData.name || 'User'}</h2>
               <span className="text-[10px] font-bold px-2 py-0.5 bg-[#123120] text-amber-400 rounded-full tracking-wide">
                 Household Admin
               </span>
@@ -216,7 +216,7 @@ export default function Profile() {
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 block">Eco-Efficiency Score</span>
             <div className="flex items-baseline gap-1">
-              <span className="text-xl font-bold font-mono text-[#113621]">88</span>
+              <span className="text-xl font-bold font-mono text-[#113621] dark:text-emerald-100">88</span>
               <span className="text-xs text-gray-500 font-medium">/ 100</span>
               <span className="ml-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Grade A</span>
             </div>
@@ -234,7 +234,7 @@ export default function Profile() {
           <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
               <UserIcon size={18} className="text-[#236144]" />
-              <h3 className="text-base font-bold text-[#113621]">Account Credentials</h3>
+              <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Account Credentials</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -266,7 +266,7 @@ export default function Profile() {
           <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
               <Home size={18} className="text-[#236144]" />
-              <h3 className="text-base font-bold text-[#113621]">CEB / LECO Domestic Premises Profile</h3>
+              <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">CEB / LECO Domestic Premises Profile</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -359,7 +359,7 @@ export default function Profile() {
           <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
               <Lock size={18} className="text-[#236144]" />
-              <h3 className="text-base font-bold text-[#113621]">Update Password</h3>
+              <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Update Password</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -394,7 +394,7 @@ export default function Profile() {
           
           {/* Energy Achievements & Gamification */}
           <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-4">
-            <h4 className="text-sm font-bold text-[#113621] flex items-center gap-2">
+            <h4 className="text-sm font-bold text-[#113621] dark:text-emerald-100 flex items-center gap-2">
               <Award size={18} className="text-amber-500" />
               <span>SmartSurge Eco Achievements</span>
             </h4>

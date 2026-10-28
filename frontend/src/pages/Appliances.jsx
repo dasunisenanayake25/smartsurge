@@ -119,9 +119,9 @@ export default function Appliances() {
 
   return (
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-5">
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200/80 pb-4 flex-shrink-0">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Smart Appliances
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
@@ -141,7 +141,7 @@ export default function Appliances() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 flex-shrink-0">
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 block mb-1">Total Devices</span>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {appliances.length}
           </p>
         </div>
@@ -155,14 +155,14 @@ export default function Appliances() {
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 block mb-1">Active Load</span>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {activeLoad} <span className="text-sm font-normal text-gray-500">W</span>
           </p>
         </div>
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 block mb-1">Est. Hourly Cost</span>
-          <p className="text-2xl sm:text-3xl font-bold text-[#113621] font-mono">
+          <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             <span className="text-base font-sans text-[#236144] mr-1">Rs.</span>
             {hourlyCostEst}
           </p>
@@ -194,7 +194,7 @@ export default function Appliances() {
           <div className="w-14 h-14 rounded-full bg-emerald-50 text-[#236144] flex items-center justify-center mb-3">
             <Sliders size={26} />
           </div>
-          <h3 className="text-lg font-bold text-[#113621] mb-1">No appliances found</h3>
+          <h3 className="text-lg font-bold text-[#113621] dark:text-emerald-100 mb-1">No appliances found</h3>
           <p className="text-xs sm:text-sm text-gray-500 max-w-sm mb-5">
             Add your air conditioner, refrigerator, TV, or smart plugs to monitor and schedule energy.
           </p>
@@ -235,7 +235,7 @@ export default function Appliances() {
                     </button>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#113621] mb-1">{app.name}</h3>
+                  <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100 mb-1">{app.name}</h3>
                   <div className="flex items-center gap-2 text-xs text-gray-500 mb-4">
                     <span className="font-mono font-medium text-gray-700">{app.ratedWattage} W</span>
                     <span>•</span>
@@ -267,7 +267,7 @@ export default function Appliances() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 relative">
             <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
-              <h3 className="text-lg font-bold text-[#113621]">Add New Appliance</h3>
+              <h3 className="text-lg font-bold text-[#113621] dark:text-emerald-100">Add New Appliance</h3>
               <button
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-400 hover:text-gray-700 p-1 rounded-lg"

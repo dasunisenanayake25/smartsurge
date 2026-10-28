@@ -162,9 +162,9 @@ const Dashboard = () => {
 
   return (
     <div className="h-full overflow-hidden flex flex-col p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto gap-4">
-      <header className="flex justify-between items-end border-b border-gray-200/80 pb-3 flex-shrink-0">
+      <header className="flex justify-between items-end pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621]">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Smart Dashboard
           </h1>
           <p className="text-gray-500 mt-0.5 font-medium text-xs md:text-sm">
@@ -198,7 +198,7 @@ const Dashboard = () => {
               {voltage}V · {current}A
             </span>
           </div>
-          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] font-mono">
+          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] dark:text-emerald-100 font-mono">
             {livePower} <span className="text-base text-gray-500 font-normal">W</span>
           </p>
         </div>
@@ -215,7 +215,7 @@ const Dashboard = () => {
               Units
             </span>
           </div>
-          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] font-mono">
+          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] dark:text-emerald-100 font-mono">
             {todayKwh} <span className="text-base text-gray-500 font-normal">kWh</span>
           </p>
         </div>
@@ -232,7 +232,7 @@ const Dashboard = () => {
               Monthly
             </span>
           </div>
-          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] font-mono">
+          <p className="text-3xl md:text-4xl font-bold tracking-tight text-[#113621] dark:text-emerald-100 font-mono">
             <span className="text-lg font-sans text-[#236144] mr-1">Rs.</span>
             {estBill.toLocaleString()}
           </p>
@@ -243,7 +243,7 @@ const Dashboard = () => {
         <div className="flex items-center justify-between mb-2 flex-shrink-0">
           <div className="flex items-center gap-2">
             <Activity className="text-[#236144]" size={18} />
-            <h3 className="text-base font-semibold text-[#113621]">Live Energy Stream</h3>
+            <h3 className="text-base font-semibold text-[#113621] dark:text-emerald-100">Live Energy Stream</h3>
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
             <span className="flex items-center gap-1">
@@ -302,7 +302,7 @@ const Dashboard = () => {
       </div>
 
       <div className="flex-shrink-0">
-        <h2 className="text-base font-semibold text-[#113621] mb-2.5 flex items-center justify-between">
+        <h2 className="text-base font-semibold text-[#113621] dark:text-emerald-100 mb-2.5 flex items-center justify-between">
           <span>Smart Appliances</span>
           <span className="text-xs text-gray-500 font-normal">Real-Time Control</span>
         </h2>
@@ -320,7 +320,7 @@ const Dashboard = () => {
                     {getApplianceIcon(app.name, app.category, isOn)}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-sm text-[#113621] leading-tight">{app.name}</h4>
+                    <h4 className="font-semibold text-sm text-[#113621] dark:text-emerald-100 leading-tight">{app.name}</h4>
                     <p className="text-[11px] text-gray-500 mt-0.5">{app.ratedWattage} W</p>
                   </div>
                 </div>
