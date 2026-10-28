@@ -202,10 +202,9 @@ export default function Landing() {
           <div className="flex items-center justify-center gap-1.5 sm:gap-3">
             <Link
               to="/register"
-              className="bg-[#236144] hover:bg-[#1a4a34] text-white px-2.5 sm:px-5 lg:px-6 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-md flex items-center gap-1.5 transition duration-150"
+              className="bg-[#236144] hover:bg-[#1a4a34] text-white px-3 sm:px-6 lg:px-7 py-1 sm:py-2 rounded-full text-[9px] sm:text-xs md:text-sm font-semibold shadow-md flex items-center justify-center transition duration-150"
             >
               <span>Get Started</span>
-              <Zap className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
             </Link>
             <a
               href="#how"
@@ -483,10 +482,9 @@ export default function Landing() {
           </p>
           <Link
             to="/register"
-            className="inline-flex items-center gap-2 bg-[#153B27] hover:bg-[#0E291B] text-white px-8 py-3 rounded-full text-sm font-semibold shadow-md transition duration-200"
+            className="inline-flex items-center justify-center bg-[#153B27] hover:bg-[#0E291B] text-white px-8 py-3 rounded-full text-sm font-semibold shadow-md transition duration-200"
           >
             <span>Get Started</span>
-            <Zap className="w-4 h-4 fill-amber-300 text-amber-300" />
           </Link>
         </div>
       </section>
