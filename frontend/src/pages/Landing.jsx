@@ -163,12 +163,6 @@ export default function Landing() {
             >
               About us
             </a>
-            <a 
-              href="#contact" 
-              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
-            >
-              Contact
-            </a>
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
