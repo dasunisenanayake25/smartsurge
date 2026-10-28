@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Cpu, History, FileText, Settings, User, LogOut } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -49,7 +54,7 @@ const Sidebar = () => {
 
       <div className="w-full px-3 mt-4">
         <button 
-          onClick={logout}
+          onClick={handleLogout}
           className="w-full flex flex-col items-center justify-center py-3 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-300"
         >
           <LogOut size={24} className="mb-1.5" />

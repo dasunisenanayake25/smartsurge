@@ -29,7 +29,9 @@ const Login = () => {
     >
       <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
         <div className="flex justify-center mb-4">
-          <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
+          <Link to="/" title="Back to Home" className="transition-transform hover:scale-105 active:scale-95 inline-block">
+            <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full shadow-[0_0_15px_rgba(251,191,36,0.25)]" />
+          </Link>
         </div>
 
         <h2 className="text-2xl md:text-3xl text-white mb-2 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
@@ -81,24 +83,6 @@ const Login = () => {
 
           <button type="submit" className="w-full bg-[#1a1a1a] hover:bg-black text-gray-200 font-medium py-3 rounded-lg transition shadow-lg mt-1 border border-white/5 text-sm">
             Login
-          </button>
-
-          <button 
-            type="button" 
-            onClick={async () => {
-              setEmail('demo@smartsurge.com');
-              setPassword('123456');
-              setError('');
-              try {
-                await login('demo@smartsurge.com', '123456');
-                navigate('/dashboard');
-              } catch (err) {
-                setError(err.response?.data?.message || 'Demo login failed');
-              }
-            }}
-            className="w-full bg-amber-400/90 hover:bg-amber-400 text-black font-bold py-2.5 rounded-lg transition shadow-md border border-amber-300 text-xs flex items-center justify-center gap-1.5"
-          >
-            <span>⚡ One-Click Demo Login (Instant Access)</span>
           </button>
         </form>
 

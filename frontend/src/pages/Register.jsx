@@ -39,7 +39,9 @@ const Register = () => {
     >
       <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
         <div className="flex justify-center mb-3">
-          <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full" />
+          <Link to="/" title="Back to Home" className="transition-transform hover:scale-105 active:scale-95 inline-block">
+            <img src="/brand-icon.png" alt="SmartSurge Logo" className="w-16 h-16 object-contain rounded-full shadow-[0_0_15px_rgba(251,191,36,0.25)]" />
+          </Link>
         </div>
 
         <h2 className="text-2xl md:text-3xl text-white mb-2 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
