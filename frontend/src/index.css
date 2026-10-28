@@ -72,3 +72,117 @@ h3,
   font-family: 'Reflow Sans', 'Gatilca', sans-serif !important;
   letter-spacing: -0.02em;
 }
+
+/* ---------------------------------------------------- */
+/* High-Contrast, Crystal-Clear Dark Mode Engine        */
+/* ---------------------------------------------------- */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #08160e;
+  color: #f1f5f9;
+}
+
+/* Cards & Surfaces */
+html.dark .bg-white {
+  background-color: #11281c !important;
+  color: #f3f4f6;
+}
+
+html.dark .bg-\[\#F8FAF6\] {
+  background-color: #0b1f14 !important;
+}
+
+html.dark .bg-\[\#F8FAF7\] {
+  background-color: #0d2417 !important;
+}
+
+html.dark .bg-\[\#EEF7F1\] {
+  background-color: #143523 !important;
+  color: #a7f3d0 !important;
+}
+
+/* Inputs, Selects & Textareas */
+html.dark input,
+html.dark select,
+html.dark textarea,
+html.dark .bg-gray-50 {
+  background-color: #091a11 !important;
+  color: #ffffff !important;
+  border-color: #1e4531 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* High-Contrast Typography for Headings & Text */
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700 {
+  color: #ffffff !important;
+}
+
+html.dark .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-gray-400 {
+  color: #64748b !important;
+}
+
+/* Forest Green Accents in Dark Mode */
+html.dark .text-\[\#113621\],
+html.dark .text-\[\#18482F\],
+html.dark .text-\[\#1E2922\],
+html.dark .text-\[\#133C24\] {
+  color: #ffffff !important;
+}
+
+html.dark .text-\[\#236144\] {
+  color: #34d399 !important;
+}
+
+/* Emerald & Amber Badges & Indicator Boxes */
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-50\/70,
+html.dark .bg-emerald-50\/80,
+html.dark .bg-emerald-50\/50,
+html.dark .bg-emerald-50\/60 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: #6ee7b7 !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-50\/70,
+html.dark .bg-amber-50\/60 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #fcd34d !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Borders & Dividers */
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-\[\#D5E4D8\],
+html.dark .border-\[\#E3EDE5\],
+html.dark .border-\[\#D7EBDC\],
+html.dark .divide-gray-100,
+html.dark .divide-gray-200 {
+  border-color: #1e4531 !important;
+}
+
+/* Table rows */
+html.dark tr.hover\:bg-gray-50\/50:hover,
+html.dark tr.hover\:bg-gray-50\/60:hover {
+  background-color: #143523 !important;
+}

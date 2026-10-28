@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Cpu, History, FileText, Settings, User, LogOut } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
+import ThemeToggle from './ThemeToggle';
 
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
@@ -52,12 +53,13 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      <div className="w-full px-3 mt-4">
+      <div className="w-full px-3 mt-4 flex flex-col items-center gap-3">
+        <ThemeToggle size="sm" />
         <button 
           onClick={handleLogout}
-          className="w-full flex flex-col items-center justify-center py-3 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-300"
+          className="w-full flex flex-col items-center justify-center py-2.5 rounded-xl text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-300"
         >
-          <LogOut size={24} className="mb-1.5" />
+          <LogOut size={22} className="mb-1" />
           <span className="text-[10px] md:text-xs font-medium">Logout</span>
         </button>
       </div>

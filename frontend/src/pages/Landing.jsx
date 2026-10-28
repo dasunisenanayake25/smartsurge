@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ThemeToggle from '../components/ThemeToggle';
 import { 
   Bell, 
   Sparkles, 
@@ -166,8 +167,9 @@ export default function Landing() {
           </a>
         </nav>
 
-        {/* Right: Auth Action Buttons */}
+        {/* Right: Theme Toggle & Auth Action Buttons */}
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <ThemeToggle size="sm" />
           <Link 
             to="/register" 
             className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
