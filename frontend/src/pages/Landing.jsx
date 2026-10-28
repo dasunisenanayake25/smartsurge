@@ -134,7 +134,7 @@ export default function Landing() {
 
       <header className="w-full flex items-center justify-between h-14 sm:h-16 bg-[#236144] px-4 sm:px-6 md:px-8 shadow-sm z-50">
         {/* Left: Brand Logo */}
-        <div className="flex items-center flex-shrink-0">
+        <div className="flex items-center shrink-0">
           <Link to="/" className="flex items-center gap-2.5">
             <img 
               src="/brand-icon.png" 
@@ -170,7 +170,7 @@ export default function Landing() {
         </nav>
 
         {/* Right: Theme Toggle & Auth Action Buttons */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <ThemeToggle size="sm" />
           <Link 
             to="/register" 
@@ -195,7 +195,7 @@ export default function Landing() {
         />
 
         <div className="flex flex-col items-center text-center absolute left-[4%] sm:left-[6%] lg:left-[8%] top-[63%] sm:top-[65%] lg:top-[66%] w-[46%] sm:w-[42%] lg:w-[38%] z-10">
-          <p className="text-gray-700 dark:text-gray-900 font-medium text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-[260px] sm:max-w-sm">
+          <p className="text-gray-700 dark:text-gray-900 font-medium text-[9px] sm:text-xs md:text-sm leading-snug sm:leading-relaxed mb-1.5 sm:mb-3.5 max-w-65 sm:max-w-sm">
             Monitor live power, predict your bill and control appliances<br className="hidden sm:inline" /> from one calm, simple dashboard.
           </p>
           <div className="flex items-center justify-center gap-1.5 sm:gap-3">
@@ -235,7 +235,7 @@ export default function Landing() {
                   onMouseLeave={() => setIsWavePaused(false)}
                   className={`bg-white rounded-2xl p-5 sm:p-6 text-center flex flex-col items-center justify-start transition-all duration-500 ease-out cursor-pointer ${
                     isActive
-                      ? 'scale-108 -translate-y-2.5 border-2 border-emerald-500 ring-4 ring-emerald-400/45 shadow-[0_0_24px_rgba(16,185,129,0.5),0_16px_32px_-4px_rgba(18,54,33,0.2)] z-20 bg-gradient-to-b from-white to-[#F2FAF4]'
+                      ? 'scale-108 -translate-y-2.5 border-2 border-emerald-500 ring-4 ring-emerald-400/45 shadow-[0_0_24px_rgba(16,185,129,0.5),0_16px_32px_-4px_rgba(18,54,33,0.2)] z-20 bg-linear-to-b from-white to-[#F2FAF4]'
                       : 'scale-100 translate-y-0 border-2 border-transparent shadow-sm hover:shadow-md hover:-translate-y-1'
                   }`}
                 >
@@ -456,9 +456,9 @@ export default function Landing() {
               >
                 <span>{f.q}</span>
                 {openFaq === i ? (
-                  <ChevronUp className="w-4 h-4 text-emerald-600 flex-shrink-0 transition-transform" />
+                  <ChevronUp className="w-4 h-4 text-emerald-600 shrink-0 transition-transform" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0 transition-transform" />
+                  <ChevronDown className="w-4 h-4 text-gray-400 shrink-0 transition-transform" />
                 )}
               </button>
               {openFaq === i && (
@@ -527,7 +527,7 @@ export default function Landing() {
                 href="tel:+94112345678" 
                 className="hover:text-amber-300 transition flex items-center gap-2 text-white font-semibold"
               >
-                <div className="w-6 h-6 rounded-full bg-[#1e4d34] flex items-center justify-center text-amber-400 flex-shrink-0">
+                <div className="w-6 h-6 rounded-full bg-[#1e4d34] flex items-center justify-center text-amber-400 shrink-0">
                   <Phone size={12} />
                 </div>
                 <span>+94 11 234 5678</span>
