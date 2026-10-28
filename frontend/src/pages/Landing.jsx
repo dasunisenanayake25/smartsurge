@@ -129,8 +129,9 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#F8FAF6] text-[#1E2922] font-sans antialiased selection:bg-[#9CD49E] selection:text-white">
 
-      <header className="w-full flex items-stretch h-14 sm:h-16 bg-[#236144] shadow-sm z-50">
-        <div className="bg-[#236144] px-4 sm:px-6 md:px-8 flex items-center justify-center flex-shrink-0">
+      <header className="w-full flex items-center justify-between h-14 sm:h-16 bg-[#236144] px-4 sm:px-6 md:px-8 shadow-sm z-50">
+        {/* Left: Brand Logo */}
+        <div className="flex items-center flex-shrink-0">
           <Link to="/" className="flex items-center gap-2.5">
             <img 
               src="/brand-icon.png" 
@@ -143,42 +144,42 @@ export default function Landing() {
           </Link>
         </div>
 
-        <div className="flex-1 flex items-center justify-between px-3 sm:px-6 lg:px-10 overflow-x-auto no-scrollbar gap-2 sm:gap-4">
-          <nav className="flex items-center gap-2 sm:gap-3">
-            <a 
-              href="#home" 
-              className="border border-white/80 bg-white/20 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition shadow-xs"
-            >
-              Home
-            </a>
-            <a 
-              href="#features" 
-              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
-            >
-              Features
-            </a>
-            <a 
-              href="#faq" 
-              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
-            >
-              About us
-            </a>
-          </nav>
+        {/* Center: Navigation Links perfectly centered */}
+        <nav className="flex items-center justify-center gap-2 sm:gap-3 flex-1 px-4">
+          <a 
+            href="#home" 
+            className="border border-white/80 bg-white/20 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition shadow-xs"
+          >
+            Home
+          </a>
+          <a 
+            href="#features" 
+            className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+          >
+            Features
+          </a>
+          <a 
+            href="#faq" 
+            className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+          >
+            About us
+          </a>
+        </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <Link 
-              to="/register" 
-              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
-            >
-              Register
-            </Link>
-            <Link 
-              to="/login" 
-              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
-            >
-              Login
-            </Link>
-          </div>
+        {/* Right: Auth Action Buttons */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <Link 
+            to="/register" 
+            className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+          >
+            Register
+          </Link>
+          <Link 
+            to="/login" 
+            className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+          >
+            Login
+          </Link>
         </div>
       </header>
 
