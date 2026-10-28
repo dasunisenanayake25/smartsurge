@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }) => {
     <div className="flex h-screen overflow-hidden bg-white dark:bg-[#0c1f15] transition-colors duration-300">
       <Sidebar />
       <SurgeToast />
-      <div className="flex-1 flex flex-col min-w-0 bg-[#F8FAF6] dark:bg-[#0e2419] transition-colors duration-300">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#9CD49E] transition-colors duration-300">
         <main className="flex-1 overflow-hidden relative text-gray-900 dark:text-gray-100">
           {children}
         </main>
