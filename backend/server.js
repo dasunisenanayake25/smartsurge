@@ -3,6 +3,9 @@ import http from 'http';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import applianceRoutes from './routes/applianceRoutes.js';
@@ -13,6 +16,30 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+
+// Security: HTTP Headers protection with Helmet
+app.use(helmet());
+
+// Security: Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Security: Rate limiting to prevent brute-force & DDoS attacks
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // limit each IP to 300 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests from this IP, please try again after 15 minutes.' },
+});
+app.use('/api/', apiLimiter);
+
+// Specific stricter rate limiter for Auth endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30, // 30 attempts per 15 min for login/register
+  message: { message: 'Too many login attempts, please try again in 15 minutes.' },
+});
+app.use('/api/v1/auth', authLimiter);
 
 const io = new Server(server, {
   cors: {

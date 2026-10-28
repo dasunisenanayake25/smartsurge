@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import ThemeToggle from '../components/ThemeToggle';
 import { 
@@ -24,6 +24,31 @@ export default function Landing() {
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
   const [isWavePaused, setIsWavePaused] = useState(false);
+  const [isHowInView, setIsHowInView] = useState(false);
+  const howSectionRef = useRef(null);
+
+  // IntersectionObserver to flip cards when scrolled into view (and flip back when scrolled out)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHowInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.35,
+        rootMargin: '0px 0px -10% 0px'
+      }
+    );
+
+    if (howSectionRef.current) {
+      observer.observe(howSectionRef.current);
+    }
+
+    return () => {
+      if (howSectionRef.current) {
+        observer.unobserve(howSectionRef.current);
+      }
+    };
+  }, []);
 
   // Interactive demo appliances for Landing preview tab
   const [previewApps, setPreviewApps] = useState([
@@ -259,7 +284,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section id="how" className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
+      <section id="how" ref={howSectionRef} className="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center scroll-mt-20">
         <h2 className="font-serif text-3xl sm:text-4xl text-[#113621] font-bold tracking-tight mb-2">
           How it works
         </h2>
@@ -271,14 +296,45 @@ export default function Landing() {
           {steps.map((s, idx) => (
             <div 
               key={idx} 
-              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#D5E4D8] shadow-sm hover:border-emerald-500 hover:ring-4 hover:ring-emerald-400/35 hover:shadow-[0_0_22px_rgba(16,185,129,0.35),0_12px_24px_-4px_rgba(18,54,33,0.12)] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
+              className="perspective-1000 h-[190px] sm:h-[180px] w-full"
             >
-              <h3 className="font-serif text-lg font-bold text-[#113621] mb-2.5">
-                {s.num}
-              </h3>
-              <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                {s.desc}
-              </p>
+              <div 
+                className={`relative w-full h-full ease-out transform-style-3d ${
+                  isHowInView ? '' : 'rotate-y-180'
+                }`}
+                style={{
+                  transitionDuration: '1100ms',
+                  transitionDelay: `${idx * 220}ms`
+                }}
+              >
+                {/* Front Side: Displayed when scrolled into view (Correct details side) */}
+                <div className="absolute inset-0 backface-hidden bg-white rounded-2xl p-6 sm:p-7 border border-[#D5E4D8] shadow-sm hover:border-emerald-500 hover:ring-4 hover:ring-emerald-400/35 hover:shadow-[0_0_22px_rgba(16,185,129,0.35),0_12px_24px_-4px_rgba(18,54,33,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-start">
+                  <div className="flex items-center gap-2 mb-2.5">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold font-serif">
+                      {idx + 1}
+                    </span>
+                    <h3 className="font-serif text-lg font-bold text-[#113621]">
+                      {s.num.replace(/^[0-9]+\.\s*/, '')}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                    {s.desc}
+                  </p>
+                </div>
+
+                {/* Back Side (Opposite Side): Displayed before reaching this place */}
+                <div className="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-[#123924] to-[#1e5737] rounded-2xl p-6 sm:p-7 border border-emerald-700/50 shadow-md flex flex-col items-center justify-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-emerald-300 mb-2 border border-white/15">
+                    <Zap className="w-6 h-6 text-emerald-400" />
+                  </div>
+                  <span className="font-serif font-bold text-base text-white tracking-wide">
+                    Step {idx + 1}
+                  </span>
+                  <span className="text-[11px] text-emerald-200/80 font-medium mt-1">
+                    SmartSurge Flow
+                  </span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
