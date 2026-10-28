@@ -400,33 +400,33 @@ export default function Profile() {
             </h4>
 
             <div className="flex flex-col gap-3">
-              <div className="p-3 bg-emerald-50/70 border border-emerald-200/80 rounded-xl flex items-center gap-3">
-                <div className="p-2 bg-emerald-100 text-emerald-700 rounded-lg flex-shrink-0">
+              <div className="p-3 bg-transparent border border-emerald-300 dark:border-emerald-500/40 rounded-xl flex items-center gap-3">
+                <div className="p-2 bg-emerald-100/80 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 rounded-lg flex-shrink-0">
                   <ShieldCheck size={18} />
                 </div>
                 <div>
-                  <h5 className="text-xs font-bold text-gray-900">Slab 2 Guardian</h5>
-                  <p className="text-[11px] text-gray-500">Maintained household under 60 kWh for 2 consecutive billing cycles.</p>
+                  <h5 className="text-xs font-bold text-gray-900 dark:text-white">Slab 2 Guardian</h5>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">Maintained household under 60 kWh for 2 consecutive billing cycles.</p>
                 </div>
               </div>
 
-              <div className="p-3 bg-amber-50/70 border border-amber-200/80 rounded-xl flex items-center gap-3">
-                <div className="p-2 bg-amber-100 text-amber-700 rounded-lg flex-shrink-0">
+              <div className="p-3 bg-transparent border border-amber-300 dark:border-amber-500/40 rounded-xl flex items-center gap-3">
+                <div className="p-2 bg-amber-100/80 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 rounded-lg flex-shrink-0">
                   <Zap size={18} />
                 </div>
                 <div>
-                  <h5 className="text-xs font-bold text-gray-900">Peak Load Shifter</h5>
-                  <p className="text-[11px] text-gray-500">Successfully shifted over 35 kWh of heavy loads away from 6:30–10:30 PM.</p>
+                  <h5 className="text-xs font-bold text-gray-900 dark:text-white">Peak Load Shifter</h5>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">Successfully shifted over 35 kWh of heavy loads away from 6:30–10:30 PM.</p>
                 </div>
               </div>
 
-              <div className="p-3 bg-blue-50/70 border border-blue-200/80 rounded-xl flex items-center gap-3">
-                <div className="p-2 bg-blue-100 text-blue-700 rounded-lg flex-shrink-0">
+              <div className="p-3 bg-transparent border border-blue-300 dark:border-blue-500/40 rounded-xl flex items-center gap-3">
+                <div className="p-2 bg-blue-100/80 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded-lg flex-shrink-0">
                   <Leaf size={18} />
                 </div>
                 <div>
-                  <h5 className="text-xs font-bold text-gray-900">Phantom Hunter</h5>
-                  <p className="text-[11px] text-gray-500">Eliminated midnight idle standby drains, saving ~12 kg CO₂ emissions.</p>
+                  <h5 className="text-xs font-bold text-gray-900 dark:text-white">Phantom Hunter</h5>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">Eliminated midnight idle standby drains, saving ~12 kg CO₂ emissions.</p>
                 </div>
               </div>
             </div>
