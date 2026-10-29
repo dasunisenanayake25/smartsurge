@@ -1,6 +1,6 @@
 # SmartGrid Home - Household Energy Management Platform (SmartSurge)
 
-> **EC4307: Web Application Development Project**  
+> **EC4307: Web Application Development Mini Project**  
 > **Official Project Title:** SmartSurge: SmartGrid Home - Household Energy Management Platform  
 > A production-ready, full-stack MERN IoT Household Energy Management Platform built with React 19, Node.js, Express, MongoDB Atlas, and Socket.io real-time telemetry.
 
