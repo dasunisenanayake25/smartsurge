@@ -98,7 +98,7 @@ const Login = () => {
 
         <div className="relative flex items-center justify-center my-4">
           <div className="border-t border-white/20 w-full"></div>
-          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or continue with</span>
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium whitespace-nowrap">Or continue with</span>
           <div className="border-t border-white/20 w-full"></div>
         </div>
 
@@ -109,7 +109,7 @@ const Login = () => {
             onError={() => setError('Google Authentication encountered an error.')}
             theme="filled_black"
             shape="pill"
-            text="signin_with"
+            text="continue_with"
             size="large"
             width="100%"
           />
