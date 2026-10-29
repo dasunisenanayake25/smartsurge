@@ -1,8 +1,8 @@
 # SmartGrid Home - Household Energy Management Platform (SmartSurge)
 
-> **EC4307 Web Application Development Mini Project**  
-> **Official Project Title:** SmartGrid Home - Household Energy Management Platform  
-> A full-stack MERN IoT Household Energy Management Platform built with React, Node.js, Express, MongoDB Atlas, and Socket.io real-time telemetry.
+> **EC4307: Web Application Development Project**  
+> **Official Project Title:** SmartSurge: SmartGrid Home - Household Energy Management Platform  
+> A production-ready, full-stack MERN IoT Household Energy Management Platform built with React 19, Node.js, Express, MongoDB Atlas, and Socket.io real-time telemetry.
 
 ---
 
@@ -14,18 +14,76 @@
 
 ---
 
-## Project Overview
+## Features
 
-**SmartGrid Home** (branded as **SmartSurge**) enables households to monitor live power consumption, automate appliance loads, prevent electrical peak-hour waste, and calculate electricity bills according to official **Sri Lankan CEB / LECO domestic tariff slabs**.
+### 1. Dual Authentication & Identity Management
+- **Google OAuth 2.0 Integration:** Fast, one-click authentication via `@react-oauth/google` and verified server-side with `google-auth-library`.
+- **Local Email & Password Authentication:** Secure registration and login powered by JSON Web Tokens (JWT) and `bcryptjs` password hashing with salt rounds.
+- **Form UX & Security:**
+  - Password visibility toggle (Show/Hide).
+  - Clean single-line divider (`OR CONTINUE WITH`) separating local and Google auth options.
+  - Automatic token persistence in `localStorage` and route protection via React Router guards.
+  - Demo login one-click credentials auto-fill.
 
-### Key Highlights:
-- **Full CRUD Operations:** Add, monitor, toggle, edit, and delete smart household appliances.
-- **Real-Time IoT Simulation & WebSockets:** Sub-second power telemetry streaming via `Socket.io`.
-- **Google OAuth 2.0 & Local Auth:** Secure authentication with Google Sign-In and standard email/password (JWT + Bcrypt).
-- **CEB / LECO Tariff Calculation Engine:** Accurately estimates progressive block tariffs, fixed charges, and fuel adjustments.
-- **Demand-Side Management (DSM):** Automated peak-hour load shedding and phantom load protection.
-- **Full Mobile & Desktop Responsiveness:** Optimized for smartphones, tablets, and desktops with mobile drawer navigation, hamburger menus, and adaptive touch-friendly layouts.
-- **Modern UI & Themes:** High-contrast Dark / Light mode switching, typography (`Reflow Sans` + `Gatilca`), and interactive charts (`Recharts`).
+### 2. Full Mobile & Cross-Device Responsiveness
+- **Adaptive Layouts:** Tested across mobile screens (<640px), tablets (768px - 1024px), and high-resolution desktop viewports.
+- **Mobile Drawer Navigation:**
+  - Protected app interface includes a dedicated mobile header with brand identity and a slide-out drawer menu for effortless one-handed thumb navigation.
+  - Automatic drawer close on route change and overlay backdrop dismiss.
+- **Responsive Landing Header:**
+  - Desktop pill navigation with quick action buttons.
+  - Mobile hamburger toggle (`Menu` / `X`) with smooth animated slide-down accordion for navigation links and auth buttons.
+- **Scroll & Card Adaptability:** Responsive flex wrapping, touch-scrollable tables, chart containers with auto-resizing SVG viewBoxes, and responsive modal dialogues.
+
+### 3. High-Contrast Dark & Light Mode
+- **Persistent Theme Engine:** Powered by custom React `ThemeContext` with state stored in `localStorage` and synchronized with system OS preferences (`prefers-color-scheme`).
+- **Tailwind CSS v4 Dark Selector:** Complete palette switching between light canvas (`#F8FAF6`, `#FFFFFF`) and high-contrast dark tones (`#0F172A`, `#1E293B`, `#022c22`).
+- **Floating & Header Theme Toggles:** Dedicated `ThemeToggle` component with Sun/Moon icons accessible on both landing and authenticated app navigation bars.
+
+### 4. Smart Dashboard & Real-Time Telemetry Simulation
+- **Live Duplex WebSockets (`Socket.io`):** Instant sub-second updates streaming live active wattage, mains voltage, and line current.
+- **CEB Slab Progress Bar:** Visual indicator tracking current household consumption against CEB 30, 60, and 90 kWh thresholds.
+- **Real-Time Visual Alerts (SurgeToast):** Custom toast notification trigger warning users when power surges exceed safety thresholds (e.g., >3,500W).
+- **Quick Appliance Control:** Instant toggle switch widgets right from the dashboard to remotely switch connected smart plugs ON or OFF.
+- **Dynamic Cost Projection:** Live-updating monthly expenditure predictions based on active telemetry.
+
+### 5. Appliances Management (Complete CRUD)
+- **Device Inventory:** View all household appliances categorized by AC, Refrigerator, Washing Machine, TV, Lighting, and Other.
+- **Add New Appliance:** Modal form with rated wattage specification, category selection, and smart plug assignment.
+- **Edit Appliance Details:** Modify appliance name, category, or power rating with immediate recalculation of total household connected load.
+- **Delete Appliance:** Safe removal with confirmation modal to prevent accidental data loss.
+- **Interactive State Toggling:** Remote relay state switching with live database synchronization and Socket.io event broadcasting.
+
+### 6. CEB / LECO Domestic Tariff Billing Engine
+- **Progressive Slab Calculation:** Models official Public Utilities Commission of Sri Lanka (PUCSL) domestic electricity tariff structures:
+  - **Block 1 (0–30 kWh):** Lowest subsidized unit rate.
+  - **Block 2 (31–60 kWh):** Intermediate domestic rate.
+  - **Block 3 (61–90 kWh):** Progressive block rate.
+  - **Block 4 (90+ kWh):** Higher consumption tier with stepped fixed monthly service charges.
+- **Interactive Tariff Breakdown:** Visual cards showing exact unit charges, fixed monthly service fees, and total estimated billing amounts.
+- **Billing History & Statements:** Comprehensive monthly breakdown with downloadable PDF / CSV export simulations.
+
+### 7. Historical Analytics & Data Visualization
+- **Multi-Period Filtering:** Switch views seamlessly between Daily, Weekly, and Monthly usage logs.
+- **Interactive Recharts Visualizations:** Responsive Area charts, Bar charts, and Line graphs highlighting peak consumption hours.
+- **Telemetry Log Table:** Tabular inspection of voltage, current, power draw, and timestamps with pagination and search.
+
+### 8. Energy Safeguards & Smart Automation (DSM)
+- **Overvoltage & Voltage Surge Cutoff:** Automatic load disconnect when grid voltage exceeds safety tolerances (e.g., 250V+).
+- **Peak-Hour Load Shedding:** Schedules automated power restrictions during Sri Lanka's national peak window (18:30 - 22:30).
+- **Monthly Budget Alerting:** Customizable budget threshold alerts notifying users when current month projections exceed budget limits (e.g., 80% or 100% of LKR target).
+
+### 9. User Profile & Utility Preferences
+- **Account Management:** Edit user profile, household type (Single-storey, Two-storey, Apartment), resident count, and geographical district.
+- **Utility Account Binding:** Store CEB / LECO utility account number for bill cross-referencing.
+- **Solar PV Net-Metering Settings:** Configuration options for households with rooftop solar net-accounting / net-metering systems.
+
+### 10. Robust Backend Security & Reliability
+- **HTTP Security Headers (`helmet`):** Protection against Cross-Site Scripting (XSS), clickjacking, and MIME-sniffing.
+- **Rate Limiting (`express-rate-limit`):** Prevents DoS and brute-force attacks by limiting requests per IP window.
+- **NoSQL Injection Sanitization (`express-mongo-sanitize`):** Prohibits MongoDB query selector injection attempts.
+- **CORS Protection:** Configured with strict origin whitelisting allowing authorized frontend clients.
+- **Mongoose Connection Caching:** Optimized serverless database connection pooling preventing connection leaks in Vercel functions.
 
 ---
 
@@ -33,42 +91,50 @@
 
 ```mermaid
 erDiagram
-    USER ||--o{ APPLIANCE : "owns"
-    USER ||--o{ ENERGY_LOG : "records"
+    USERS ||--o{ APPLIANCES : "owns / manages"
+    USERS ||--o{ ENERGY_LOGS : "records"
+    APPLIANCES ||--o{ ENERGY_LOGS : "measured_by"
 
-    USER {
+    USERS {
         ObjectId _id PK
         string name
-        string email
-        string password
-        string googleId
-        string premisesType
-        number monthlyBudget
-        number budgetAlertThreshold
-        object utilityPreferences
+        string email UK
+        string password "Bcrypt hash (optional for OAuth)"
+        string googleId "Google OAuth sub ID"
+        string role "user | admin"
+        number monthlyBudget "LKR Target"
+        string cebAccountNo "CEB account number"
+        string houseType "Two-Storey Residential, etc."
+        number residentsCount
+        string solarSetup "None / Net-metering"
+        string district "Colombo, etc."
         date createdAt
+        date updatedAt
     }
 
-    APPLIANCE {
+    APPLIANCES {
         ObjectId _id PK
         ObjectId userId FK
-        string name
-        string category
-        number ratedWattage
-        boolean isOn
+        string name "Appliance Name"
+        string category "AC | Refrigerator | Washing Machine | TV | Lighting | Other"
+        number ratedWattage "Watts"
+        string status "ON | OFF"
         boolean isSmartPlugConnected
         date createdAt
+        date updatedAt
     }
 
-    ENERGY_LOG {
+    ENERGY_LOGS {
         ObjectId _id PK
         ObjectId userId FK
-        number voltage
-        number current
-        number activePower
-        number energyKwh
-        number costEstimate
+        ObjectId applianceId FK "optional"
+        number voltage "Volts"
+        number current "Amperes"
+        number powerWatt "Watts"
+        number energyKwh "kWh"
         date timestamp
+        date createdAt
+        date updatedAt
     }
 ```
 
@@ -76,13 +142,18 @@ erDiagram
 
 ## Tech Stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS v4, React Router v7, Lucide Icons, Recharts, Socket.io Client, `@react-oauth/google`.
-- **Backend:** Node.js, Express.js (REST API + WebSockets), Socket.io, `google-auth-library`.
-- **Security & Protection:** Helmet (HTTP Security Headers), Express-Rate-Limit (Brute-Force & DoS Protection), Express-Mongo-Sanitize (NoSQL Injection Prevention).
-- **Database:** MongoDB Atlas (Cloud) / Local MongoDB with Mongoose ODM.
-- **Authentication:** Google OAuth 2.0 + JWT (JSON Web Tokens) Bearer Authentication with Bcrypt password hashing.
-- **Deployment:** Vercel (Serverless Backend Functions + Static Vite Frontend).
-- **Testing:** Node.js native test runner (`node --test`) for automated Unit Testing.
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend Framework** | React 19, Vite 8, React Router v7 |
+| **Styling & Icons** | Tailwind CSS v4, Lucide React Icons |
+| **Charts & Visualization** | Recharts Responsive Area & Bar Charts |
+| **Real-Time WebSockets** | Socket.io Client |
+| **Third-Party Auth** | `@react-oauth/google`, `google-auth-library` |
+| **Backend Runtime** | Node.js (v18+), Express.js (REST API + WebSockets) |
+| **Database & ODM** | MongoDB Atlas Cloud, Mongoose 8 |
+| **Security Packages** | Helmet, Express-Rate-Limit, Express-Mongo-Sanitize, Bcryptjs, JSONWebToken |
+| **Cloud Hosting** | Vercel (Edge Network + Serverless Functions) |
+| **Automated Testing** | Node.js Native Test Runner (`node --test`) |
 
 ---
 
@@ -90,22 +161,22 @@ erDiagram
 
 All API routes are prefixed with `/api/v1` and protected via JWT Bearer authentication headers (except public Auth and Health endpoints).
 
-### 1. Authentication & User Profile (`/api/v1/auth`)
+### 1. Authentication & Profile (`/api/v1/auth`)
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/api/v1/auth/register` | Public | Register a new user account with initial premises profile |
+| `POST` | `/api/v1/auth/register` | Public | Register new user account with initial household profile |
 | `POST` | `/api/v1/auth/login` | Public | Authenticate user credentials and return JWT bearer token |
-| `POST` | `/api/v1/auth/google` | Public | Verify Google OAuth 2.0 credential token and login/register user |
-| `GET` | `/api/v1/auth/profile` | Private | Retrieve logged-in user profile, budget limits & preferences |
-| `PUT` | `/api/v1/auth/profile` | Private | Update monthly budget, tariff tier preferences, and password |
+| `POST` | `/api/v1/auth/google` | Public | Verify Google OAuth token, create or login user, return JWT |
+| `GET` | `/api/v1/auth/profile` | Private | Retrieve logged-in user profile, budget limits & settings |
+| `PUT` | `/api/v1/auth/profile` | Private | Update monthly budget, household profile, and settings |
 
 ### 2. Appliances Management - CRUD (`/api/v1/appliances`)
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/api/v1/appliances` | Private | Retrieve all registered household appliances with filter/sort |
-| `POST` | `/api/v1/appliances` | Private | Create a new appliance record with wattage & smart plug status |
-| `PUT` | `/api/v1/appliances/:id` | Private | Update appliance details, edit wattage, or toggle state (ON/OFF) |
-| `DELETE` | `/api/v1/appliances/:id` | Private | Safely remove an appliance and recalculate live load |
+| `GET` | `/api/v1/appliances` | Private | Retrieve all household appliances for authenticated user |
+| `POST` | `/api/v1/appliances` | Private | Create a new appliance record with category and wattage |
+| `PUT` | `/api/v1/appliances/:id` | Private | Update appliance details, edit wattage, or toggle status (ON/OFF) |
+| `DELETE` | `/api/v1/appliances/:id` | Private | Delete appliance record and recalculate active household load |
 
 ### 3. Energy Telemetry & Billing Analytics (`/api/v1/energy`)
 | Method | Endpoint | Access | Description |
@@ -117,7 +188,7 @@ All API routes are prefixed with `/api/v1` and protected via JWT Bearer authenti
 ### 4. Health & System Diagnostics
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/api/v1/health` | Public | Verify server uptime, Socket.io gateway status, and timestamp |
+| `GET` | `/api/v1/health` | Public | Verify server uptime, API gateway status, and timestamp |
 
 ### 5. WebSocket Real-Time Events (`Socket.io`)
 | Event | Direction | Payload / Description |
@@ -150,7 +221,7 @@ Configure your environment variables in `backend/.env`:
 ```env
 PORT=5000
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.nu4hyik.mongodb.net/smartsurge?retryWrites=true&w=majority
-JWT_SECRET=your_jwt_secret_key
+JWT_SECRET=your_super_secret_jwt_key
 JWT_EXPIRE=30d
 CLIENT_URL=http://localhost:5173
 GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
@@ -219,17 +290,5 @@ You can sign in using **Continue with Google** or use the pre-configured credent
 
 ---
 
-## Features Walkthrough
-
-1. **Landing Page:** Interactive system overview, responsive mobile drawer navigation, live power simulator tabs, feature highlights, and CEB FAQ accordions.
-2. **Google OAuth 2.0 & Local Auth:** Dual authentication option with clean UI and single-line dividers.
-3. **Smart Dashboard:** Live telemetry stream (Watts, Volts, Amps), estimated monthly bill prediction, and instant appliance quick-toggles.
-4. **Appliances Management (CRUD):** Complete device inventory management with live power draw recalculation.
-5. **Historical Energy Analytics:** Day/Week/Month telemetry visualization charts and log tables.
-6. **Billing & CEB Tariff Reports:** Tiered progressive block breakdown (Block 1: 0–30, Block 2: 31–60, Block 3: 61–90 kWh).
-7. **Energy Safeguards & Settings:** Voltage surge cutoff triggers, peak-hour load shedding, and monthly expenditure limits.
-
----
-
 ## License
-This project is developed for educational evaluation under module **EC4307 - Web Application Development**. All rights reserved.
+This project is developed for educational evaluation under module **EC4307: Web Application Development**. All rights reserved.
