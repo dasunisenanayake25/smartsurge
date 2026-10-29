@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { io } from 'socket.io-client';
+import { getSocket } from '../services/socket';
 import { 
   FileText, 
   Printer, 
@@ -72,19 +72,18 @@ export default function Reports() {
 
   // Socket.io for live telemetry power updates
   useEffect(() => {
-    const socket = io('http://localhost:5000', {
-      transports: ['websocket', 'polling'],
-      reconnectionAttempts: 5,
-    });
+    const socket = getSocket();
 
-    socket.on('energyUpdate', (data) => {
+    const handleUpdate = (data) => {
       if (data && data.powerWatt !== undefined) {
         setLivePower(Math.round(data.powerWatt));
       }
-    });
+    };
+
+    socket.on('energyUpdate', handleUpdate);
 
     return () => {
-      socket.disconnect();
+      socket.off('energyUpdate', handleUpdate);
     };
   }, []);
 

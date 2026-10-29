@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { io } from 'socket.io-client';
+import { getSocket } from '../services/socket';
 import { 
   Power, 
   Zap, 
@@ -84,10 +84,11 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000', {
-      transports: ['websocket', 'polling'],
-      reconnectionAttempts: 5,
-    });
+    const socket = getSocket();
+
+    if (socket.connected) {
+      setIsConnected(true);
+    }
 
     socket.on('connect', () => {
       setIsConnected(true);

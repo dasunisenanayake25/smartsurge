@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import { getSocket } from '../services/socket';
 import { AlertTriangle, X, Zap, ShieldAlert } from 'lucide-react';
 
 export default function SurgeToast() {
@@ -7,12 +7,9 @@ export default function SurgeToast() {
   const [dismissedUntil, setDismissedUntil] = useState(0);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000', {
-      transports: ['websocket', 'polling'],
-      reconnectionAttempts: 5,
-    });
+    const socket = getSocket();
 
-    socket.on('energyUpdate', (data) => {
+    const handleUpdate = (data) => {
       if (data && data.powerWatt !== undefined) {
         const watt = Math.round(data.powerWatt);
         const now = Date.now();
@@ -32,10 +29,12 @@ export default function SurgeToast() {
           setSurgeAlert(null);
         }
       }
-    });
+    };
+
+    socket.on('energyUpdate', handleUpdate);
 
     return () => {
-      socket.disconnect();
+      socket.off('energyUpdate', handleUpdate);
     };
   }, [dismissedUntil]);
 
