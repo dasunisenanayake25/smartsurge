@@ -2,7 +2,15 @@
 
 > **EC4307 Web Application Development Mini Project**  
 > **Official Project Title:** SmartGrid Home - Household Energy Management Platform  
-> A full-stack MERN IoT Household Energy Management Platform built with React, Node.js, Express, MongoDB, and Socket.io real-time telemetry.
+> A full-stack MERN IoT Household Energy Management Platform built with React, Node.js, Express, MongoDB Atlas, and Socket.io real-time telemetry.
+
+---
+
+## Live Deployments
+
+- **Frontend Web Application:** [https://smartsurge-39pv.vercel.app](https://smartsurge-39pv.vercel.app)
+- **Backend REST API:** [https://smartsurge.vercel.app](https://smartsurge.vercel.app)
+- **API Health Check:** [https://smartsurge.vercel.app/api/v1/health](https://smartsurge.vercel.app/api/v1/health)
 
 ---
 
@@ -13,9 +21,11 @@
 ### Key Highlights:
 - **Full CRUD Operations:** Add, monitor, toggle, edit, and delete smart household appliances.
 - **Real-Time IoT Simulation & WebSockets:** Sub-second power telemetry streaming via `Socket.io`.
+- **Google OAuth 2.0 & Local Auth:** Secure authentication with Google Sign-In and standard email/password (JWT + Bcrypt).
 - **CEB / LECO Tariff Calculation Engine:** Accurately estimates progressive block tariffs, fixed charges, and fuel adjustments.
 - **Demand-Side Management (DSM):** Automated peak-hour load shedding and phantom load protection.
-- **Modern Responsive UI:** Designed with custom typography (`Reflow Sans` + `Gatilca`), interactive charts (`Recharts`), and seamless **Dark / Light mode switching**.
+- **Full Mobile & Desktop Responsiveness:** Optimized for smartphones, tablets, and desktops with mobile drawer navigation, hamburger menus, and adaptive touch-friendly layouts.
+- **Modern UI & Themes:** High-contrast Dark / Light mode switching, typography (`Reflow Sans` + `Gatilca`), and interactive charts (`Recharts`).
 
 ---
 
@@ -31,6 +41,7 @@ erDiagram
         string name
         string email
         string password
+        string googleId
         string premisesType
         number monthlyBudget
         number budgetAlertThreshold
@@ -65,24 +76,26 @@ erDiagram
 
 ## Tech Stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS v4, React Router v7, Lucide Icons, Recharts, Socket.io Client.
-- **Backend:** Node.js, Express.js (REST API + WebSockets), Socket.io.
+- **Frontend:** React 19, Vite, Tailwind CSS v4, React Router v7, Lucide Icons, Recharts, Socket.io Client, `@react-oauth/google`.
+- **Backend:** Node.js, Express.js (REST API + WebSockets), Socket.io, `google-auth-library`.
 - **Security & Protection:** Helmet (HTTP Security Headers), Express-Rate-Limit (Brute-Force & DoS Protection), Express-Mongo-Sanitize (NoSQL Injection Prevention).
-- **Database:** MongoDB with Mongoose ODM.
-- **Authentication:** JWT (JSON Web Tokens) Bearer Authentication with Bcrypt password hashing & salt rounds.
+- **Database:** MongoDB Atlas (Cloud) / Local MongoDB with Mongoose ODM.
+- **Authentication:** Google OAuth 2.0 + JWT (JSON Web Tokens) Bearer Authentication with Bcrypt password hashing.
+- **Deployment:** Vercel (Serverless Backend Functions + Static Vite Frontend).
 - **Testing:** Node.js native test runner (`node --test`) for automated Unit Testing.
 
 ---
 
 ## API Endpoints Reference
 
-All API routes are prefixed with `/api/v1` and protected via JWT Bearer authentication headers (except public Auth endpoints).
+All API routes are prefixed with `/api/v1` and protected via JWT Bearer authentication headers (except public Auth and Health endpoints).
 
 ### 1. Authentication & User Profile (`/api/v1/auth`)
 | Method | Endpoint | Access | Description |
 | :--- | :--- | :--- | :--- |
 | `POST` | `/api/v1/auth/register` | Public | Register a new user account with initial premises profile |
 | `POST` | `/api/v1/auth/login` | Public | Authenticate user credentials and return JWT bearer token |
+| `POST` | `/api/v1/auth/google` | Public | Verify Google OAuth 2.0 credential token and login/register user |
 | `GET` | `/api/v1/auth/profile` | Private | Retrieve logged-in user profile, budget limits & preferences |
 | `PUT` | `/api/v1/auth/profile` | Private | Update monthly budget, tariff tier preferences, and password |
 
@@ -119,11 +132,11 @@ All API routes are prefixed with `/api/v1` and protected via JWT Bearer authenti
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or higher)
-- [MongoDB](https://www.mongodb.com/try/download/community) installed and running locally on port `27017`
+- [MongoDB](https://www.mongodb.com/) (Local on port `27017` or MongoDB Atlas URI)
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/smartsurge.git
+git clone https://github.com/dasunisenanayake25/smartsurge.git
 cd smartsurge
 ```
 
@@ -136,9 +149,11 @@ npm install
 Configure your environment variables in `backend/.env`:
 ```env
 PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/smartsurge
-JWT_SECRET=smartsurge_super_secret_jwt_key_2026
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.nu4hyik.mongodb.net/smartsurge?retryWrites=true&w=majority
+JWT_SECRET=your_jwt_secret_key
 JWT_EXPIRE=30d
+CLIENT_URL=http://localhost:5173
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
 ```
 
 Seed initial database records (Demo user & sample appliances):
@@ -149,7 +164,7 @@ npm run seed
 Start the backend server:
 ```bash
 npm run dev
-# Server will run on http://localhost:5000
+# Server runs on http://localhost:5000
 ```
 
 Run Automated Backend Unit Tests:
@@ -163,9 +178,22 @@ Open a new terminal:
 ```bash
 cd frontend
 npm install
-npm run dev
-# Frontend will run on http://localhost:5173
 ```
+
+Configure your environment variables in `frontend/.env`:
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+VITE_SOCKET_URL=http://localhost:5000
+VITE_GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+```
+
+Start the frontend development server:
+```bash
+npm run dev
+# Frontend runs on http://localhost:5173
+```
+
+---
 
 ## Automated Unit Testing
 
@@ -185,7 +213,7 @@ npm test
 
 ## Authentication & Test Credentials
 
-You can create a new account through the `/register` page, or use the pre-configured credentials:
+You can sign in using **Continue with Google** or use the pre-configured credentials:
 - **Email:** `demo@smartsurge.com`
 - **Password:** `123456`
 
@@ -193,12 +221,13 @@ You can create a new account through the `/register` page, or use the pre-config
 
 ## Features Walkthrough
 
-1. **Landing Page:** Interactive system overview, working live power simulator tabs, feature highlights, and CEB FAQ accordions.
-2. **Smart Dashboard:** Live telemetry stream (Watts, Volts, Amps), estimated monthly bill prediction, and instant appliance quick-toggles.
-3. **Appliances Management (CRUD):** Complete device inventory management with live power draw recalculation.
-4. **Historical Energy Analytics:** Day/Week/Month telemetry visualization charts and log tables.
-5. **Billing & CEB Tariff Reports:** Tiered progressive block breakdown (Block 1: 0–30, Block 2: 31–60, Block 3: 61–90 kWh).
-6. **Energy Safeguards & Settings:** Voltage surge cutoff triggers, peak-hour load shedding, and monthly expenditure limits.
+1. **Landing Page:** Interactive system overview, responsive mobile drawer navigation, live power simulator tabs, feature highlights, and CEB FAQ accordions.
+2. **Google OAuth 2.0 & Local Auth:** Dual authentication option with clean UI and single-line dividers.
+3. **Smart Dashboard:** Live telemetry stream (Watts, Volts, Amps), estimated monthly bill prediction, and instant appliance quick-toggles.
+4. **Appliances Management (CRUD):** Complete device inventory management with live power draw recalculation.
+5. **Historical Energy Analytics:** Day/Week/Month telemetry visualization charts and log tables.
+6. **Billing & CEB Tariff Reports:** Tiered progressive block breakdown (Block 1: 0–30, Block 2: 31–60, Block 3: 61–90 kWh).
+7. **Energy Safeguards & Settings:** Voltage surge cutoff triggers, peak-hour load shedding, and monthly expenditure limits.
 
 ---
 
