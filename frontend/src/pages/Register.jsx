@@ -35,7 +35,7 @@ const Register = () => {
   return (
     <div 
       className="h-screen overflow-hidden bg-cover bg-center flex items-center justify-center lg:justify-end px-4 lg:px-24"
-      style={{ backgroundImage: "url('/bg-login.jpg')" }}
+      style={{ backgroundImage: "url('/bg-register.jpg')" }}
     >
       <div className="w-full max-w-md lg:max-w-lg bg-white/10 backdrop-blur-xl p-6 md:p-8 lg:p-10 rounded-[30px] border border-white/20 shadow-2xl text-center max-h-screen overflow-y-auto custom-scrollbar">
         <div className="flex justify-center mb-3">
