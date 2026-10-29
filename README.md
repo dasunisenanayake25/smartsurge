@@ -89,6 +89,11 @@
 
 ## System Architecture & Database Design (ERD)
 
+![SmartSurge Entity-Relationship Diagram](docs/smartsurge-erd.png)
+
+<details>
+<summary>Click to view Mermaid Diagram definition</summary>
+
 ```mermaid
 erDiagram
     USERS ||--o{ APPLIANCES : "owns / manages"
@@ -137,6 +142,8 @@ erDiagram
         date updatedAt
     }
 ```
+
+</details>
 
 ---
 
