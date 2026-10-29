@@ -183,10 +183,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-full overflow-hidden flex flex-col p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto gap-4">
-      <header className="flex justify-between items-end pb-2 flex-shrink-0">
+    <div className="h-full overflow-y-auto md:overflow-hidden flex flex-col p-3 sm:p-5 md:p-6 relative z-10 w-full max-w-7xl mx-auto gap-3 sm:gap-4 custom-scrollbar">
+      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 pb-1 sm:pb-2 flex-shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#113621] dark:text-emerald-100">
             Smart Dashboard
           </h1>
           <p className="text-gray-500 mt-0.5 font-medium text-xs md:text-sm">
@@ -194,16 +194,16 @@ const Dashboard = () => {
           </p>
         </div>
 
-        <div className="text-right hidden sm:flex flex-col items-end">
-          <p className="text-xs md:text-sm font-semibold text-gray-600">
-            {new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
-          </p>
-          <div className="flex items-center gap-1.5 mt-1 bg-white border border-gray-200 px-3 py-1 rounded-full shadow-2xs">
+        <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-2">
+          <div className="flex items-center gap-1.5 bg-white border border-gray-200 px-2.5 py-1 rounded-full shadow-2xs">
             <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-red-400'}`}></span>
-            <p className={`text-xs font-semibold ${isConnected ? 'text-emerald-700' : 'text-gray-500'}`}>
-              {isConnected ? 'IoT Stream: Live' : 'Connecting Stream...'}
+            <p className={`text-[11px] sm:text-xs font-semibold ${isConnected ? 'text-emerald-700' : 'text-gray-500'}`}>
+              {isConnected ? 'IoT Stream: Live' : 'Connecting...'}
             </p>
           </div>
+          <p className="text-xs sm:text-sm font-semibold text-gray-600 hidden sm:block">
+            {new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
+          </p>
         </div>
       </header>
 

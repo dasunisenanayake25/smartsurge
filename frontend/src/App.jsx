@@ -21,11 +21,11 @@ const ProtectedRoute = ({ children }) => {
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="flex h-screen overflow-hidden bg-white dark:bg-[#0c1f15] transition-colors duration-300">
+    <div className="flex flex-col md:flex-row h-screen overflow-hidden bg-white dark:bg-[#0c1f15] transition-colors duration-300">
       <Sidebar />
       <SurgeToast />
-      <div className="flex-1 flex flex-col min-w-0 bg-[#9CD49E] transition-colors duration-300">
-        <main className="flex-1 overflow-hidden relative text-gray-900 dark:text-gray-100">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#9CD49E] transition-colors duration-300 pt-14 md:pt-0 h-full overflow-hidden">
+        <main className="flex-1 overflow-hidden relative text-gray-900 dark:text-gray-100 h-full">
           {children}
         </main>
       </div>
@@ -75,13 +75,14 @@ function App() {
             </DashboardLayout>
           </ProtectedRoute>
         } />
-        <Route path='/profile' element={
+        <Route path="/profile" element={
           <ProtectedRoute>
             <DashboardLayout>
               <Profile />
             </DashboardLayout>
           </ProtectedRoute>
         } />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
