@@ -22,6 +22,10 @@ app.use(helmet());
 // Security: Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
+// Middleware for parsing JSON and CORS
+app.use(express.json());
+app.use(cors());
+
 // Security: Rate limiting to prevent brute-force & DDoS attacks
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -50,8 +54,14 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.use(express.json());
-app.use(cors());
+// Root ping route for direct URL testing (smartsurge.vercel.app/)
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'online',
+    service: 'SmartSurge Backend API',
+    documentation: '/api/v1/health'
+  });
+});
 
 // HTTP routes
 app.use('/api/v1/auth', authRoutes);
@@ -66,7 +76,7 @@ app.get('/api/v1/health', (req, res) => {
   });
 });
 
-// Socket.io for local server mode
+// Socket.io for local server mode (Note: WebSockets don't persist on serverless Vercel)
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -84,15 +94,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
 });
 
-startIoTSimulator(io);
-
-// Standalone local execution
+// Only run IoT simulator in local standalone mode to prevent memory exhaustion in serverless
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  startIoTSimulator(io);
+
   const PORT = process.env.PORT || 5000;
   server.listen(PORT, () => {
     console.log(`[Server] SmartSurge Express Server running on Port: ${PORT}`);
   });
 }
 
-// Export app for Vercel Serverless Function handler
+// Export default app for Vercel Serverless Function handler
 export default app;
