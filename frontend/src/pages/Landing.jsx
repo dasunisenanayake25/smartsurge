@@ -16,7 +16,9 @@ import {
   CheckCircle2,
   Zap,
   Phone,
-  Mail
+  Mail,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function Landing() {
@@ -25,6 +27,7 @@ export default function Landing() {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
   const [isWavePaused, setIsWavePaused] = useState(false);
   const [isHowInView, setIsHowInView] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const howSectionRef = useRef(null);
 
   // IntersectionObserver to flip cards when scrolled into view (and flip back when scrolled out)
@@ -157,59 +160,119 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#F8FAF6] text-[#1E2922] font-sans antialiased selection:bg-[#9CD49E] selection:text-white">
 
-      <header className="w-full flex items-center justify-between h-14 sm:h-16 bg-[#236144] px-4 sm:px-6 md:px-8 shadow-sm z-50">
-        {/* Left: Brand Logo */}
-        <div className="flex items-center shrink-0">
-          <Link to="/" className="flex items-center gap-2.5">
-            <img 
-              src="/brand-icon.png" 
-              alt="SmartSurge Logo" 
-              className="h-8 sm:h-9 w-auto object-contain brightness-110" 
-            />
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white">
-              Smart<span className="text-amber-400">Surge</span>
-            </span>
-          </Link>
+      <header className="sticky top-0 w-full bg-[#236144] px-4 sm:px-6 md:px-8 shadow-sm z-50">
+        <div className="flex items-center justify-between h-14 sm:h-16">
+          {/* Left: Brand Logo */}
+          <div className="flex items-center shrink-0">
+            <Link to="/" className="flex items-center gap-2 sm:gap-2.5">
+              <img 
+                src="/brand-icon.png" 
+                alt="SmartSurge Logo" 
+                className="h-8 sm:h-9 w-auto object-contain brightness-110" 
+              />
+              <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-white">
+                Smart<span className="text-amber-400">Surge</span>
+              </span>
+            </Link>
+          </div>
+
+          {/* Center: Navigation Links (hidden on mobile, visible on desktop) */}
+          <nav className="hidden md:flex items-center justify-center gap-2 sm:gap-3 flex-1 px-4">
+            <a 
+              href="#home" 
+              className="border border-white/80 bg-white/20 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition shadow-xs"
+            >
+              Home
+            </a>
+            <a 
+              href="#features" 
+              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+            >
+              Features
+            </a>
+            <a 
+              href="#faq" 
+              className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
+            >
+              About us
+            </a>
+          </nav>
+
+          {/* Right: Theme Toggle & Auth Action Buttons (Desktop) */}
+          <div className="hidden md:flex items-center gap-2 sm:gap-3 shrink-0">
+            <ThemeToggle size="sm" />
+            <Link 
+              to="/register" 
+              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+            >
+              Register
+            </Link>
+            <Link 
+              to="/login" 
+              className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
+            >
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile Right Controls: Theme Toggle & Hamburger Button */}
+          <div className="flex md:hidden items-center gap-2 shrink-0">
+            <ThemeToggle size="sm" />
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-1.5 rounded-lg text-white hover:bg-white/10 focus:outline-hidden transition"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
-        {/* Center: Navigation Links perfectly centered */}
-        <nav className="flex items-center justify-center gap-2 sm:gap-3 flex-1 px-4">
-          <a 
-            href="#home" 
-            className="border border-white/80 bg-white/20 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition shadow-xs"
-          >
-            Home
-          </a>
-          <a 
-            href="#features" 
-            className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
-          >
-            Features
-          </a>
-          <a 
-            href="#faq" 
-            className="border border-white/80 hover:bg-white/10 text-white rounded-full px-3.5 sm:px-5 py-1 text-xs sm:text-sm font-medium tracking-wide transition"
-          >
-            About us
-          </a>
-        </nav>
-
-        {/* Right: Theme Toggle & Auth Action Buttons */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <ThemeToggle size="sm" />
-          <Link 
-            to="/register" 
-            className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
-          >
-            Register
-          </Link>
-          <Link 
-            to="/login" 
-            className="border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full px-4 sm:px-5 py-1 text-xs sm:text-sm font-semibold tracking-wide transition duration-150"
-          >
-            Login
-          </Link>
-        </div>
+        {/* Mobile Dropdown Menu Drawer */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-white/20 py-4 px-2 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
+            <nav className="flex flex-col gap-2">
+              <a 
+                href="#home" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white hover:bg-white/10 rounded-lg px-4 py-2 text-sm font-medium transition"
+              >
+                Home
+              </a>
+              <a 
+                href="#features" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white hover:bg-white/10 rounded-lg px-4 py-2 text-sm font-medium transition"
+              >
+                Features
+              </a>
+              <a 
+                href="#faq" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white hover:bg-white/10 rounded-lg px-4 py-2 text-sm font-medium transition"
+              >
+                About us
+              </a>
+            </nav>
+            <div className="pt-2 border-t border-white/15 flex flex-col gap-2">
+              <Link 
+                to="/register" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center border border-white/80 hover:bg-white hover:text-[#236144] text-white rounded-full py-2 text-sm font-semibold tracking-wide transition"
+              >
+                Register
+              </Link>
+              <Link 
+                to="/login" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center bg-white text-[#236144] rounded-full py-2 text-sm font-semibold tracking-wide shadow-sm hover:bg-emerald-50 transition"
+              >
+                Login
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="home" className="w-full relative overflow-hidden bg-white">
