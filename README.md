@@ -42,7 +42,6 @@ The SmartSurge platform incorporates a suite of 8 specialized household energy m
   - Password visibility toggle (Show/Hide).
   - Clean single-line divider (`OR CONTINUE WITH`) separating local and Google auth options.
   - Automatic token persistence in `localStorage` and route protection via React Router guards.
-  - Demo login one-click credentials auto-fill.
 
 ### 2. Full Mobile & Cross-Device Responsiveness
 - **Adaptive Layouts:** Tested across mobile screens (<640px), tablets (768px - 1024px), and high-resolution desktop viewports.
