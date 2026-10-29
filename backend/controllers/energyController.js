@@ -5,23 +5,20 @@ import EnergyLog from '../models/EnergyLog.js';
 // @access  Private
 export const getLiveEnergyData = async (req, res) => {
   try {
+    // Get the latest energy log recorded for the user
     const latestLog = await EnergyLog.findOne({ userId: req.user._id }).sort({ timestamp: -1 });
 
-    const voltage = +(220 + (Math.sin(Date.now() / 4000) * 8) + (Math.random() * 2)).toFixed(2);
-    const current = +(1.8 + Math.random() * 4.2).toFixed(2);
-    const powerWatt = +(voltage * current).toFixed(2);
-    const energyKwh = +(powerWatt / 1000).toFixed(4);
+    if (!latestLog) {
+      return res.status(200).json({
+        voltage: 0,
+        current: 0,
+        powerWatt: 0,
+        energyKwh: 0,
+        timestamp: new Date(),
+      });
+    }
 
-    const liveData = {
-      userId: req.user._id,
-      voltage: latestLog?.voltage || voltage,
-      current: latestLog?.current || current,
-      powerWatt: latestLog?.powerWatt || powerWatt,
-      energyKwh: latestLog?.energyKwh || energyKwh,
-      timestamp: new Date(),
-    };
-
-    res.status(200).json(liveData);
+    res.status(200).json(latestLog);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

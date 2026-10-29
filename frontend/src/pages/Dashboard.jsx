@@ -84,6 +84,8 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    let hasReceivedSocket = false;
+
     const socket = getSocket();
 
     if (socket.connected) {
@@ -98,8 +100,10 @@ const Dashboard = () => {
       setIsConnected(false);
     });
 
-    socket.on('energyUpdate', (data) => {
+    const handleEnergyUpdate = (data) => {
       if (data && data.powerWatt !== undefined) {
+        hasReceivedSocket = true;
+        setIsConnected(true);
         const roundedWatt = Math.round(data.powerWatt);
         setLivePower(roundedWatt);
         setVoltage(data.voltage);
@@ -124,10 +128,27 @@ const Dashboard = () => {
           return updated.slice(-20);
         });
       }
-    });
+    };
+
+    socket.on('energyUpdate', handleEnergyUpdate);
+
+    // Fallback Polling interval (Active on Serverless/Vercel or if socket is quiet)
+    const pollInterval = setInterval(async () => {
+      if (!hasReceivedSocket) {
+        try {
+          const res = await API.get('/energy/live');
+          if (res.data) {
+            handleEnergyUpdate(res.data);
+          }
+        } catch (err) {
+          // ignore transient poll error
+        }
+      }
+    }, 2500);
 
     return () => {
-      socket.disconnect();
+      clearInterval(pollInterval);
+      socket.off('energyUpdate', handleEnergyUpdate);
     };
   }, []);
 
