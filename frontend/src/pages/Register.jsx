@@ -63,25 +63,6 @@ const Register = () => {
 
         {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-3 text-xs border border-red-500/20">{error}</div>}
 
-        {/* Google Sign-up Button */}
-        <div className="flex justify-center mb-3">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={() => setError('Google Authentication encountered an error.')}
-            theme="filled_black"
-            shape="pill"
-            text="signup_with"
-            size="large"
-            width="100%"
-          />
-        </div>
-
-        <div className="relative flex items-center justify-center mb-3">
-          <div className="border-t border-white/20 w-full"></div>
-          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or with email</span>
-          <div className="border-t border-white/20 w-full"></div>
-        </div>
-
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 text-left">
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
@@ -168,6 +149,25 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        <div className="relative flex items-center justify-center my-3">
+          <div className="border-t border-white/20 w-full"></div>
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or continue with</span>
+          <div className="border-t border-white/20 w-full"></div>
+        </div>
+
+        {/* Google Sign-up Button placed under local register button */}
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError('Google Authentication encountered an error.')}
+            theme="filled_black"
+            shape="pill"
+            text="signup_with"
+            size="large"
+            width="100%"
+          />
+        </div>
 
         <p className="mt-4 text-xs text-gray-300 font-light">
           Already have an account? <Link to="/login" className="text-gray-100 font-medium hover:text-amber-200 transition">Login</Link>

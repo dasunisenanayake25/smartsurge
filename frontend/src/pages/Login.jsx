@@ -53,25 +53,6 @@ const Login = () => {
 
         {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-4 text-xs border border-red-500/20">{error}</div>}
 
-        {/* Google Sign-in Button */}
-        <div className="flex justify-center mb-4">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={() => setError('Google Authentication encountered an error.')}
-            theme="filled_black"
-            shape="pill"
-            text="continue_with"
-            size="large"
-            width="100%"
-          />
-        </div>
-
-        <div className="relative flex items-center justify-center mb-4">
-          <div className="border-t border-white/20 w-full"></div>
-          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or with email</span>
-          <div className="border-t border-white/20 w-full"></div>
-        </div>
-
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
           <div>
             <label className="block text-xs text-gray-200 mb-1.5 ml-1">Your Email</label>
@@ -114,6 +95,25 @@ const Login = () => {
             Login
           </button>
         </form>
+
+        <div className="relative flex items-center justify-center my-4">
+          <div className="border-t border-white/20 w-full"></div>
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or continue with</span>
+          <div className="border-t border-white/20 w-full"></div>
+        </div>
+
+        {/* Google Sign-in Button placed under local login button */}
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError('Google Authentication encountered an error.')}
+            theme="filled_black"
+            shape="pill"
+            text="signin_with"
+            size="large"
+            width="100%"
+          />
+        </div>
 
         <p className="mt-5 text-xs text-gray-300 font-light">
           Don't have an account? <Link to="/register" className="text-gray-100 font-medium hover:text-amber-200 transition">Register</Link>
