@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Eye, EyeOff } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -13,7 +14,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   
-  const { register } = useContext(AuthContext);
+  const { register, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,6 +30,15 @@ const Register = () => {
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      await googleLogin(credentialResponse.credential);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Google Sign-up failed. Please try again.');
     }
   };
 
@@ -51,12 +61,29 @@ const Register = () => {
           Create an account to manage your smart network.
         </p>
 
-        <h3 className="text-lg text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Create an Account</h3>
-
         {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-3 text-xs border border-red-500/20">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 text-left">
-          <div className="flex flex-col sm:flex-row gap-3.5">
+        {/* Google Sign-up Button */}
+        <div className="flex justify-center mb-3">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError('Google Authentication encountered an error.')}
+            theme="filled_black"
+            shape="pill"
+            text="signup_with"
+            size="large"
+            width="100%"
+          />
+        </div>
+
+        <div className="relative flex items-center justify-center mb-3">
+          <div className="border-t border-white/20 w-full"></div>
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or with email</span>
+          <div className="border-t border-white/20 w-full"></div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 text-left">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
               <label className="block text-[11px] text-gray-200 mb-1 ml-1">First Name</label>
               <input 
@@ -93,7 +120,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3.5">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1">
               <label className="block text-[11px] text-gray-200 mb-1 ml-1">Password</label>
               <div className="relative">
@@ -142,7 +169,7 @@ const Register = () => {
           </button>
         </form>
 
-        <p className="mt-5 text-xs text-gray-300 font-light">
+        <p className="mt-4 text-xs text-gray-300 font-light">
           Already have an account? <Link to="/login" className="text-gray-100 font-medium hover:text-amber-200 transition">Login</Link>
         </p>
       </div>

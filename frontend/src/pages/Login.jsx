@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Eye, EyeOff } from 'lucide-react';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   
-  const { login } = useContext(AuthContext);
+  const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,6 +20,15 @@ const Login = () => {
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid credentials');
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      await googleLogin(credentialResponse.credential);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Google Sign-in failed. Please try again.');
     }
   };
 
@@ -37,11 +47,30 @@ const Login = () => {
         <h2 className="text-2xl md:text-3xl text-white mb-2 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
           Welcome back to <br/> Smart<span className="text-amber-300">Surge</span>
         </h2>
-        <p className="text-gray-200 text-xs md:text-sm mb-6 font-light">
+        <p className="text-gray-200 text-xs md:text-sm mb-5 font-light">
           Sign in to empower a smarter, greener tomorrow.
         </p>
 
         {error && <div className="bg-red-500/20 text-red-300 p-2 rounded-lg mb-4 text-xs border border-red-500/20">{error}</div>}
+
+        {/* Google Sign-in Button */}
+        <div className="flex justify-center mb-4">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setError('Google Authentication encountered an error.')}
+            theme="filled_black"
+            shape="pill"
+            text="continue_with"
+            size="large"
+            width="100%"
+          />
+        </div>
+
+        <div className="relative flex items-center justify-center mb-4">
+          <div className="border-t border-white/20 w-full"></div>
+          <span className="bg-transparent px-3 text-[11px] uppercase tracking-wider text-gray-300 font-medium">Or with email</span>
+          <div className="border-t border-white/20 w-full"></div>
+        </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-left">
           <div>

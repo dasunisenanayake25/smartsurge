@@ -1,6 +1,9 @@
 import User from '../models/User.js';
 import Appliance from '../models/Appliance.js';
 import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID || '250765798124-ibdcnuang81upo7h5ti54llgpa61sm01.apps.googleusercontent.com');
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -99,6 +102,65 @@ export const loginUser = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Google OAuth login / auto-register
+// @route   POST /api/v1/auth/google
+export const googleAuth = async (req, res) => {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({ message: 'Missing Google credential token' });
+    }
+
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID || '250765798124-ibdcnuang81upo7h5ti54llgpa61sm01.apps.googleusercontent.com',
+    });
+
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Auto-create new user with Google profile
+      user = await User.create({
+        name,
+        email,
+        googleId,
+        monthlyBudget: 5000,
+        cebAccountNo: '074-' + Math.floor(100 + Math.random() * 900) + '-2026',
+        houseType: 'Two-Storey Residential',
+        residentsCount: 4,
+        solarSetup: 'None',
+        district: 'Colombo',
+      });
+
+      // Populate initial sample smart appliances for seamless instant demo
+      await Appliance.insertMany([
+        { userId: user._id, name: 'Living Room Inverter AC', category: 'AC', ratedWattage: 1100, status: 'ON', isSmartPlugConnected: true },
+        { userId: user._id, name: 'Smart Refrigerator', category: 'Refrigerator', ratedWattage: 180, status: 'ON', isSmartPlugConnected: true },
+        { userId: user._id, name: 'Smart TV', category: 'TV', ratedWattage: 100, status: 'OFF', isSmartPlugConnected: true },
+        { userId: user._id, name: 'Washing Machine', category: 'Washing Machine', ratedWattage: 450, status: 'OFF', isSmartPlugConnected: true },
+      ]);
+    } else if (!user.googleId) {
+      user.googleId = googleId;
+      await user.save();
+    }
+
+    return res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: generateToken(user._id),
+    });
+  } catch (error) {
+    console.error('Google Auth Error:', error);
+    return res.status(401).json({ message: 'Google Authentication failed: ' + error.message });
   }
 };
 
