@@ -6,15 +6,34 @@
 
 ---
 
-## Live Deployments
+## Live Deployments & API Documentation
 
 - **Frontend Web Application:** [https://smartsurge-39pv.vercel.app](https://smartsurge-39pv.vercel.app)
 - **Backend REST API:** [https://smartsurge.vercel.app](https://smartsurge.vercel.app)
 - **API Health Check:** [https://smartsurge.vercel.app/api/v1/health](https://smartsurge.vercel.app/api/v1/health)
+- **Comprehensive API Documentation:** [docs/API_DOCUMENTATION.md](docs/API_DOCUMENTATION.md)
+- **Postman Collection:** [docs/SmartSurge.postman_collection.json](docs/SmartSurge.postman_collection.json) (Import directly into Postman)
 
 ---
 
-## Features
+## Core Platform Features
+
+The SmartSurge platform incorporates a suite of 8 specialized household energy management modules highlighted on the interactive portal:
+
+| Feature Icon | Feature Name | Capability & Description |
+| :---: | :--- | :--- |
+| **Smart Alerts** | Instant Spike & Limit Alerts | Sub-second notifications for over-voltage triggers (>250V), sudden power spikes (>3,500W), and budget limit warnings. |
+| **AI Saving Tips** | Energy Optimization Advisory | Contextual heuristics and recommendations to curtail phantom loads and avoid high-tariff peak windows (18:30 - 22:30). |
+| **Usage Analytics** | Live Power Breakdown | Real-time active wattage, mains voltage, and current streaming via WebSockets with dynamic appliance loads. |
+| **Smart Scheduling** | Routine Switch Automation | Automated peak-hour load shedding and scheduled on/off appliance routines to eliminate idle power waste. |
+| **Budget Goals** | Real-Time Target Tracking | Set monthly spending limits in LKR and monitor active budget consumption progress bars with automated overage alerts. |
+| **Carbon Footprint** | Environmental Impact Metric | Quantifies household carbon emission savings and environmental efficiency based on electricity reduction. |
+| **CEB Tariff Slabs** | Domestic PUCSL Estimation | Official progressive domestic block calculation (0–30, 31–60, 61–90, 90+ kWh) with accurate fixed service charge additions. |
+| **Data & CSV Export** | One-Click Report Downloads | Direct export capabilities for historical telemetry logs and monthly billing breakdowns in CSV and document formats. |
+
+---
+
+## Detailed Platform Capabilities
 
 ### 1. Dual Authentication & Identity Management
 - **Google OAuth 2.0 Integration:** Fast, one-click authentication via `@react-oauth/google` and verified server-side with `google-auth-library`.
