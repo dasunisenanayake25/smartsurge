@@ -152,46 +152,46 @@ export default function History() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 flex-shrink-0">
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-semibold text-gray-500">Average Load</span>
+            <span className="text-xs sm:text-[13px] font-semibold text-gray-500">Average Load</span>
             <Activity size={16} className="text-blue-600" />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {avgWatt} <span className="text-sm font-normal text-gray-500">W</span>
           </p>
-          <span className="text-[11px] text-gray-500 mt-1 block">Baseline running power</span>
+          <span className="text-xs sm:text-[12.5px] text-gray-600 font-medium mt-1.5 block">Baseline running power</span>
         </div>
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-semibold text-gray-500">Peak Demand Spike</span>
+            <span className="text-xs sm:text-[13px] font-semibold text-gray-500">Peak Demand Spike</span>
             <TrendingUp size={16} className="text-amber-600" />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-amber-600 font-mono">
             {peakWatt} <span className="text-sm font-normal text-gray-500">W</span>
           </p>
-          <span className="text-[11px] text-gray-500 mt-1 block">Highest instantaneous surge</span>
+          <span className="text-xs sm:text-[12.5px] text-gray-600 font-medium mt-1.5 block">Highest instantaneous surge</span>
         </div>
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-semibold text-gray-500">Total Consumption</span>
+            <span className="text-xs sm:text-[13px] font-semibold text-gray-500">Total Consumption</span>
             <Zap size={16} className="text-emerald-600" />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-emerald-600 font-mono">
             {totalKwh} <span className="text-sm font-normal text-gray-500">kWh</span>
           </p>
-          <span className="text-[11px] text-gray-500 mt-1 block">Accumulated energy units</span>
+          <span className="text-xs sm:text-[12.5px] text-gray-600 font-medium mt-1.5 block">Accumulated energy units</span>
         </div>
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-semibold text-gray-500">Grid Voltage</span>
+            <span className="text-xs sm:text-[13px] font-semibold text-gray-500">Grid Voltage</span>
             <Gauge size={16} className="text-purple-600" />
           </div>
           <p className="text-2xl sm:text-3xl font-bold text-[#113621] dark:text-emerald-100 font-mono">
             {avgVoltage} <span className="text-sm font-normal text-gray-500">V</span>
           </p>
-          <span className="text-[11px] text-emerald-600 font-semibold mt-1 block">Stable CEB nominal line</span>
+          <span className="text-xs sm:text-[12.5px] text-emerald-700 font-semibold mt-1.5 block">Stable CEB nominal line</span>
         </div>
       </div>
 

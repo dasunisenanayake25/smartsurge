@@ -362,7 +362,6 @@ export default function Reports() {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">CEB/LECO Domestic Tariff Slab Breakdown</h3>
-                <p className="text-xs text-gray-500">Progressive block calculation as mandated by Sri Lanka CEB</p>
               </div>
               <span className="text-[11px] font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
                 Domestic Category
@@ -431,7 +430,6 @@ export default function Reports() {
         <div className="lg:col-span-5 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col justify-between">
           <div>
             <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">Appliance Load Distribution</h3>
-            <p className="text-xs text-gray-500 mb-2">Percentage share of electricity consumed by key devices</p>
 
             <div className="w-full h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -487,7 +485,6 @@ export default function Reports() {
             </div>
             <div>
               <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">AI Energy Saving & Tariff Optimization Engine</h3>
-              <p className="text-xs text-gray-500">Live dynamic recommendations tailored to your current load and CEB domestic tariff</p>
             </div>
           </div>
 
@@ -507,19 +504,19 @@ export default function Reports() {
           <div className={`border rounded-xl p-4 flex flex-col justify-between transition-all duration-300 ${timeRec.cardStyle}`}>
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${timeRec.badgeColor}`}>
+                <span className={`text-[11px] font-bold uppercase tracking-wider ${timeRec.badgeColor.split(' ')[0]}`}>
                   {timeRec.badge}
                 </span>
                 <timeRec.icon size={16} className={timeRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
+              <h4 className="text-xs sm:text-[13px] font-bold text-[#113621] dark:text-emerald-100 mb-1.5">
                 {timeRec.title}
               </h4>
-              <p className="text-xs text-gray-700 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-gray-800 leading-relaxed font-medium">
                 {timeRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-xs font-semibold text-[#113621] dark:text-emerald-100">
               <TrendingDown size={14} className="text-emerald-600" />
               <span>{timeRec.metric}</span>
             </div>
@@ -529,19 +526,19 @@ export default function Reports() {
           <div className={`border rounded-xl p-4 flex flex-col justify-between transition-all duration-300 ${slabRec.cardStyle}`}>
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${slabRec.badgeColor}`}>
+                <span className={`text-[11px] font-bold uppercase tracking-wider ${slabRec.badgeColor.split(' ')[0]}`}>
                   {slabRec.badge}
                 </span>
                 <slabRec.icon size={16} className={slabRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
+              <h4 className="text-xs sm:text-[13px] font-bold text-[#113621] dark:text-emerald-100 mb-1.5">
                 {slabRec.title}
               </h4>
-              <p className="text-xs text-gray-700 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-gray-800 leading-relaxed font-medium">
                 {slabRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-xs font-semibold text-[#113621] dark:text-emerald-100">
               <AlertCircle size={14} className={slabRec.iconColor} />
               <span>{slabRec.metric}</span>
             </div>
@@ -551,19 +548,19 @@ export default function Reports() {
           <div className={`border rounded-xl p-4 flex flex-col justify-between transition-all duration-300 ${loadRec.cardStyle}`}>
             <div>
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${loadRec.badgeColor}`}>
+                <span className={`text-[11px] font-bold uppercase tracking-wider ${loadRec.badgeColor.split(' ')[0]}`}>
                   {loadRec.badge}
                 </span>
                 <loadRec.icon size={16} className={loadRec.iconColor} />
               </div>
-              <h4 className="text-xs font-bold text-[#113621] dark:text-emerald-100 mb-1">
+              <h4 className="text-xs sm:text-[13px] font-bold text-[#113621] dark:text-emerald-100 mb-1.5">
                 {loadRec.title}
               </h4>
-              <p className="text-xs text-gray-700 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-gray-800 leading-relaxed font-medium">
                 {loadRec.description}
               </p>
             </div>
-            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-[11px] font-semibold text-[#113621] dark:text-emerald-100">
+            <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-black/5 text-xs font-semibold text-[#113621] dark:text-emerald-100">
               <ShieldCheck size={14} className={loadRec.iconColor} />
               <span>{loadRec.action}</span>
             </div>

@@ -67,8 +67,10 @@ erDiagram
 
 - **Frontend:** React 19, Vite, Tailwind CSS v4, React Router v7, Lucide Icons, Recharts, Socket.io Client.
 - **Backend:** Node.js, Express.js (REST API + WebSockets), Socket.io.
+- **Security & Protection:** Helmet (HTTP Security Headers), Express-Rate-Limit (Brute-Force & DoS Protection), Express-Mongo-Sanitize (NoSQL Injection Prevention).
 - **Database:** MongoDB with Mongoose ODM.
-- **Authentication:** JWT (JSON Web Tokens) with secure HTTP headers & Bcrypt password encryption.
+- **Authentication:** JWT (JSON Web Tokens) Bearer Authentication with Bcrypt password hashing & salt rounds.
+- **Testing:** Node.js native test runner (`node --test`) for automated Unit Testing.
 
 ---
 
@@ -164,6 +166,20 @@ npm install
 npm run dev
 # Frontend will run on http://localhost:5173
 ```
+
+## Automated Unit Testing
+
+The backend includes a dedicated unit testing suite under `backend/tests/` using Node.js's native test runner (`node --test`).
+
+Run tests from the `backend/` directory:
+```bash
+npm test
+```
+
+### Test Suites Coverage:
+- `tests/tariff.test.js`: Validates CEB Domestic progressive slab calculations (Tier 1: 0–30, Tier 2: 31–60, Tier 3: 61–90, Tier 4: 90+ kWh) and fixed charge thresholds.
+- `tests/auth.test.js`: Tests Bcrypt salt generation, password hashing integrity, and JWT authentication token issuance & verification.
+- `tests/appliance.test.js`: Tests Appliance entity schema constraints, field validations, and wattage ranges for CRUD integrity.
 
 ---
 

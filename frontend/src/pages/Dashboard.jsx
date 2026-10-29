@@ -188,13 +188,11 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-shrink-0">
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-blue-50 text-blue-600 rounded-xl border border-blue-100">
-                <Zap size={18} />
-              </div>
+            <div className="flex items-center gap-2">
+              <Zap size={20} className="text-blue-600" />
               <h3 className="text-sm font-semibold text-gray-700">Live Power</h3>
             </div>
-            <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-mono font-medium">
+            <span className="text-xs text-blue-700 font-mono font-medium">
               {voltage}V · {current}A
             </span>
           </div>
@@ -205,13 +203,11 @@ const Dashboard = () => {
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl border border-emerald-100">
-                <Power size={18} />
-              </div>
+            <div className="flex items-center gap-2">
+              <Power size={20} className="text-emerald-600" />
               <h3 className="text-sm font-semibold text-gray-700">Today's Usage</h3>
             </div>
-            <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+            <span className="text-xs text-emerald-700 font-medium">
               Units
             </span>
           </div>
@@ -222,13 +218,11 @@ const Dashboard = () => {
 
         <div className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-sm hover:shadow-md transition">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-amber-50 text-amber-600 rounded-xl border border-amber-100">
-                <DollarSign size={18} />
-              </div>
+            <div className="flex items-center gap-2">
+              <DollarSign size={20} className="text-amber-600" />
               <h3 className="text-sm font-semibold text-gray-700">Est. Bill</h3>
             </div>
-            <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 font-medium">
+            <span className="text-xs text-amber-700 font-medium">
               Monthly
             </span>
           </div>

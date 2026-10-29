@@ -49,8 +49,8 @@ const Sidebar = () => {
                 {isActive && (
                   <div className="absolute left-[-4px] top-1/2 -translate-y-1/2 w-1.5 h-6 bg-white rounded-r-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
                 )}
-                <item.icon size={20} className="mb-0.5 drop-shadow-sm" />
-                <span className="text-[10px] md:text-[11px] font-medium tracking-wide">{item.name}</span>
+                <item.icon size={22} className="mb-0.5 drop-shadow-sm" />
+                <span className="text-xs sm:text-[12.5px] font-medium tracking-wide">{item.name}</span>
               </>
             )}
           </NavLink>
@@ -65,8 +65,8 @@ const Sidebar = () => {
           title="Logout of SmartSurge"
           className="w-full flex flex-col items-center justify-center py-2 rounded-xl text-red-300 hover:text-white hover:bg-red-500/20 active:scale-95 transition-all duration-200 cursor-pointer"
         >
-          <LogOut size={20} className="mb-0.5 text-red-400 group-hover:text-red-300" />
-          <span className="text-[10px] md:text-[11px] font-medium text-red-300">Logout</span>
+          <LogOut size={22} className="mb-0.5 text-red-400 group-hover:text-red-300" />
+          <span className="text-xs sm:text-[12.5px] font-medium text-red-300">Logout</span>
         </button>
       </div>
     </aside>

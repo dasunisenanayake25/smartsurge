@@ -114,7 +114,6 @@ export default function Settings() {
   const tabs = [
     { id: 'budget', name: 'Budget & Cost Limits', icon: DollarSign },
     { id: 'tariff', name: 'CEB / LECO Tariff', icon: Sliders },
-    { id: 'iot', name: 'IoT Hardware Gateway', icon: Wifi },
     { id: 'alerts', name: 'Alerts & Protection', icon: Bell },
   ];
 
@@ -128,7 +127,7 @@ export default function Settings() {
             System & Energy Settings
           </h1>
           <p className="text-gray-500 mt-0.5 text-xs md:text-sm">
-            Configure monthly expenditure limits, CEB tariff slabs, ESP32 telemetry gateway, and surge alerts
+            Configure monthly expenditure limits, CEB tariff slabs, and power surge alerts
           </p>
         </div>
 
@@ -450,125 +449,7 @@ export default function Settings() {
         )}
 
         {/* ---------------------------------------------------- */}
-        {/* TAB 3: IoT Hardware Gateway (ESP32 / NodeMCU) */}
-        {/* ---------------------------------------------------- */}
-        {activeTab === 'iot' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-8 bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-5">
-              <div>
-                <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100">IoT Telemetry Gateway & Smart Meter Setup</h3>
-                <p className="text-xs text-gray-500">Configure ESP32/PZEM-004T physical hardware meter or switch to software simulation loop</p>
-              </div>
-
-              {/* Mode Selector */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div
-                  onClick={() => setSettings({ ...settings, operationMode: 'simulation' })}
-                  className={`p-4 rounded-xl border cursor-pointer transition ${
-                    settings.operationMode === 'simulation'
-                      ? 'border-[#236144] bg-emerald-50/50 ring-1 ring-[#236144]'
-                      : 'border-gray-200 bg-white hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold text-[#236144] uppercase tracking-wide">Testing & FYP Demo</span>
-                    <Server size={18} className="text-[#236144]" />
-                  </div>
-                  <h4 className="text-sm font-bold text-gray-900">Virtual IoT Simulation Mode</h4>
-                  <p className="text-xs text-gray-500 mt-1">Simulates real-world dynamic load fluctuations via backend Node.js streaming loop.</p>
-                </div>
-
-                <div
-                  onClick={() => setSettings({ ...settings, operationMode: 'hardware' })}
-                  className={`p-4 rounded-xl border cursor-pointer transition ${
-                    settings.operationMode === 'hardware'
-                      ? 'border-[#236144] bg-emerald-50/50 ring-1 ring-[#236144]'
-                      : 'border-gray-200 bg-white hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold text-blue-600 uppercase tracking-wide">Physical Hardware</span>
-                    <Wifi size={18} className="text-blue-600" />
-                  </div>
-                  <h4 className="text-sm font-bold text-gray-900">Physical ESP32 Gateway</h4>
-                  <p className="text-xs text-gray-500 mt-1">Connects to physical PZEM-004T current transformers & NodeMCU Wi-Fi relay board.</p>
-                </div>
-              </div>
-
-              {/* Hardware Parameters */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div>
-                  <label className="text-xs font-semibold text-gray-700 block mb-1">Gateway Local IP Address</label>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={settings.hardwareIp}
-                      onChange={(e) => setSettings({ ...settings, hardwareIp: e.target.value })}
-                      className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#236144]"
-                      placeholder="192.168.8.105"
-                    />
-                    <button
-                      type="button"
-                      onClick={handlePingTest}
-                      disabled={pingStatus === 'testing'}
-                      className="px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded-xl transition flex-shrink-0"
-                    >
-                      {pingStatus === 'testing' ? 'Testing...' : 'Ping Test'}
-                    </button>
-                  </div>
-                  {pingStatus === 'success' && (
-                    <span className="text-[11px] text-emerald-600 font-semibold mt-1 block">
-                      Ping successful (14ms latency)
-                    </span>
-                  )}
-                </div>
-
-                <div>
-                  <label className="text-xs font-semibold text-gray-700 block mb-1">Telemetry Sampling Interval</label>
-                  <select
-                    value={settings.samplingInterval}
-                    onChange={(e) => setSettings({ ...settings, samplingInterval: e.target.value })}
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#236144]"
-                  >
-                    <option value="1">1 second (Ultra-responsive stream)</option>
-                    <option value="2">2 seconds (Default / Recommended)</option>
-                    <option value="5">5 seconds (Low bandwidth mode)</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Gateway Status Badge */}
-              <div className="p-4 bg-[#F8FAF6] border border-[#E3EDE5] rounded-xl flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <div>
-                    <h5 className="text-xs font-bold text-gray-900">Gateway Status: Online & Synchronized</h5>
-                    <p className="text-[11px] text-gray-500">SSID: {settings.wifiSsid} • Baud Rate: {settings.baudRate} bps • Port: 5000 (WebSocket)</p>
-                  </div>
-                </div>
-                <span className="text-[11px] font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">
-                  Signal: -58 dBm
-                </span>
-              </div>
-
-            </div>
-
-            <div className="lg:col-span-4 flex flex-col gap-4">
-              <div className="bg-white border border-gray-200/90 rounded-2xl p-5 shadow-sm flex flex-col gap-3">
-                <h4 className="text-sm font-bold text-[#113621] dark:text-emerald-100">Hardware Architecture</h4>
-                <ul className="text-xs text-gray-600 space-y-2 list-disc list-inside">
-                  <li><strong>MCU:</strong> ESP32 Dual-Core 240MHz</li>
-                  <li><strong>Sensor:</strong> PZEM-004T v3.0 (V, I, P, E)</li>
-                  <li><strong>Relay:</strong> 4-Channel Optocoupler Relay</li>
-                  <li><strong>Protocol:</strong> WebSocket + MQTT REST</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ---------------------------------------------------- */}
-        {/* TAB 4: Alerts & Protection */}
+        {/* TAB 3: Alerts & Protection */}
         {/* ---------------------------------------------------- */}
         {activeTab === 'alerts' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

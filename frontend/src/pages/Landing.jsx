@@ -350,7 +350,7 @@ export default function Landing() {
           </p>
 
           <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/80 text-left max-w-4xl mx-auto">
-            <div className="flex items-center gap-6 border-b border-gray-100 pb-4 mb-6 text-xs sm:text-sm">
+            <div className="flex items-center gap-6 pb-4 mb-6 text-xs sm:text-sm">
               {['Dashboard', 'Live Power', 'Appliances', 'Billing'].map((tab) => (
                 <button
                   key={tab}
@@ -370,29 +370,26 @@ export default function Landing() {
             {activeTab === 'Dashboard' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-in fade-in duration-300">
                 <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
-                  <span className="block text-[11px] font-medium text-gray-500 mb-1">Live Power Draw</span>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">1.84 kW</span>
-                  <div className="border-t border-gray-200/60 pt-3">
-                    <span className="block text-xs font-semibold text-gray-700">Real-time monitoring</span>
-                    <span className="block text-[11px] text-gray-500">Continuous telemetry stream.</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Live Power Draw</span>
+                  <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621] mb-2.5">1.84 kW</span>
+                  <div className="border-t border-gray-200/60 pt-2.5">
+                    <span className="block text-sm font-semibold text-gray-800">Real-time monitoring</span>
                   </div>
                 </div>
 
                 <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
-                  <span className="block text-[11px] font-medium text-gray-500 mb-1">Estimated Month Bill</span>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">Rs. 8,420</span>
-                  <div className="border-t border-gray-200/60 pt-3">
-                    <span className="block text-xs font-semibold text-gray-700">CEB Tariff Prediction</span>
-                    <span className="block text-[11px] text-gray-500">Know your bill before it arrives.</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Estimated Month Bill</span>
+                  <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621] mb-2.5">Rs. 8,420</span>
+                  <div className="border-t border-gray-200/60 pt-2.5">
+                    <span className="block text-sm font-semibold text-gray-800">CEB Tariff Prediction</span>
                   </div>
                 </div>
 
                 <div className="bg-[#F8FAF7] rounded-2xl p-5 border border-[#E3EDE5]">
-                  <span className="block text-[11px] font-medium text-gray-500 mb-1">Active Smart Relays</span>
-                  <span className="block text-2xl sm:text-3xl font-serif font-bold text-[#113621] mb-3">4 Connected</span>
-                  <div className="border-t border-gray-200/60 pt-3">
-                    <span className="block text-xs font-semibold text-gray-700">NodeMCU Gateway</span>
-                    <span className="block text-[11px] text-gray-500">Instant remote power cut-offs.</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Active Smart Relays</span>
+                  <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621] mb-2.5">4 Connected</span>
+                  <div className="border-t border-gray-200/60 pt-2.5">
+                    <span className="block text-sm font-semibold text-gray-800">NodeMCU Gateway</span>
                   </div>
                 </div>
               </div>
@@ -402,24 +399,24 @@ export default function Landing() {
             {activeTab === 'Live Power' && (
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5 mb-6 animate-in fade-in duration-300">
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-0.5">AC Line Voltage</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">AC Line Voltage</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621]">230.4 V</span>
-                  <span className="text-[10px] text-emerald-600 font-semibold mt-1 block">CEB Grid Nominal</span>
+                  <span className="text-xs sm:text-[12.5px] text-emerald-700 font-semibold mt-1.5 block">CEB Grid Nominal</span>
                 </div>
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-0.5">RMS Current</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">RMS Current</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621]">2.15 A</span>
-                  <span className="text-[10px] text-gray-500 mt-1 block">Active CT Sensor Draw</span>
+                  <span className="text-xs sm:text-[12.5px] text-gray-700 font-medium mt-1.5 block">Active CT Sensor Draw</span>
                 </div>
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-0.5">Active Wattage</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Active Wattage</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-emerald-700">495 W</span>
-                  <span className="text-[10px] text-emerald-600 font-semibold mt-1 block">Safe Household Load</span>
+                  <span className="text-xs sm:text-[12.5px] text-emerald-700 font-semibold mt-1.5 block">Safe Household Load</span>
                 </div>
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-0.5">Grid Frequency</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Grid Frequency</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621]">50.0 Hz</span>
-                  <span className="text-[10px] text-gray-500 mt-1 block">Power Factor: 0.98</span>
+                  <span className="text-xs sm:text-[12.5px] text-gray-700 font-medium mt-1.5 block">Power Factor: 0.98</span>
                 </div>
               </div>
             )}
@@ -427,8 +424,8 @@ export default function Landing() {
             {/* Tab 3: Interactive Appliances with Live Clickable Switches */}
             {activeTab === 'Appliances' && (
               <div className="mb-6 animate-in fade-in duration-300">
-                <div className="flex items-center justify-between mb-3 text-xs">
-                  <span className="text-gray-500 font-medium">Click switches to test live remote control:</span>
+                <div className="flex items-center justify-between mb-3 text-xs sm:text-sm">
+                  <span className="text-gray-600 font-medium">Click switches to test live remote control:</span>
                   <span className="font-serif font-bold text-[#113621]">Total Live Draw: <span className="text-emerald-700">{previewTotalWatt} W</span></span>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -443,7 +440,7 @@ export default function Landing() {
                       }`}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-bold uppercase text-gray-400">{app.watts}W</span>
+                        <span className="text-[11px] font-bold uppercase text-gray-500">{app.watts}W</span>
                         <div className={`w-8 h-4 rounded-full transition-colors relative flex items-center p-0.5 ${
                           app.status ? 'bg-[#236144]' : 'bg-gray-300'
                         }`}>
@@ -452,8 +449,8 @@ export default function Landing() {
                           }`}></div>
                         </div>
                       </div>
-                      <span className="block font-bold text-xs text-[#113621] truncate">{app.name}</span>
-                      <span className={`text-[10px] font-semibold mt-0.5 block ${app.status ? 'text-emerald-700' : 'text-gray-400'}`}>
+                      <span className="block font-bold text-xs sm:text-sm text-[#113621] truncate">{app.name}</span>
+                      <span className={`text-[11px] sm:text-xs font-semibold mt-0.5 block ${app.status ? 'text-emerald-700' : 'text-gray-400'}`}>
                         {app.status ? 'Running' : 'Turned Off'}
                       </span>
                     </div>
@@ -466,29 +463,24 @@ export default function Landing() {
             {activeTab === 'Billing' && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 animate-in fade-in duration-300">
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-1">Active CEB Tier</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Active CEB Tier</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621]">Tier 3 (61–90)</span>
-                  <span className="text-[11px] text-gray-500 mt-2 block border-t border-gray-200 pt-2">Rate: Rs. 30.00 / kWh</span>
+                  <span className="text-xs sm:text-[12.5px] text-gray-700 font-medium mt-2 block border-t border-gray-200 pt-2">Rate: Rs. 30.00 / kWh</span>
                 </div>
 
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-1">Month-to-Date Cost</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Month-to-Date Cost</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-emerald-700">Rs. 2,150.00</span>
-                  <span className="text-[11px] text-gray-500 mt-2 block border-t border-gray-200 pt-2">Includes Rs. 400 Fixed Fee</span>
+                  <span className="text-xs sm:text-[12.5px] text-gray-700 font-medium mt-2 block border-t border-gray-200 pt-2">Includes Rs. 400 Fixed Fee</span>
                 </div>
 
                 <div className="bg-[#F8FAF7] rounded-2xl p-4 border border-[#E3EDE5]">
-                  <span className="block text-[11px] text-gray-500 mb-1">Target Monthly Budget</span>
+                  <span className="block text-xs sm:text-[13px] font-medium text-gray-600 mb-1">Target Monthly Budget</span>
                   <span className="block text-xl sm:text-2xl font-serif font-bold text-[#113621]">Rs. 5,000.00</span>
-                  <span className="text-[11px] text-emerald-600 font-semibold mt-2 block border-t border-gray-200 pt-2">43% Used • In Safe Zone</span>
+                  <span className="text-xs sm:text-[12.5px] text-emerald-700 font-semibold mt-2 block border-t border-gray-200 pt-2">43% Used • In Safe Zone</span>
                 </div>
               </div>
             )}
-
-            <div className="bg-[#EEF7F1] border border-[#D7EBDC] rounded-xl px-4 py-2.5 flex items-center gap-2 text-xs text-[#133C24]">
-              <CheckCircle2 className="w-4 h-4 text-[#1E5735]" />
-              <span>Private by design — Your usage data stays yours.</span>
-            </div>
           </div>
         </div>
       </section>
@@ -545,7 +537,7 @@ export default function Landing() {
       </section>
 
       <footer className="bg-[#123120] text-gray-300 py-14 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-[#214A33] pb-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8">
           <div className="max-w-sm">
             <div className="flex items-center gap-2.5 mb-3">
               <img 
@@ -581,24 +573,17 @@ export default function Landing() {
               <span className="text-[11px] font-bold text-gray-200 uppercase tracking-wider mb-1">Contact Us</span>
               <a 
                 href="tel:+94112345678" 
-                className="hover:text-amber-300 transition flex items-center gap-2 text-white font-semibold"
+                className="hover:text-amber-300 transition flex items-center gap-1.5 text-white font-semibold"
               >
-                <div className="w-6 h-6 rounded-full bg-[#1e4d34] flex items-center justify-center text-amber-400 shrink-0">
-                  <Phone size={12} />
-                </div>
+                <Phone size={13} className="text-amber-400 shrink-0" />
                 <span>+94 11 234 5678</span>
               </a>
-              <span className="text-[10px] text-gray-400">Mon - Fri: 8:30 AM - 5:30 PM</span>
             </div>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row justify-between items-center text-[11px] text-gray-500 gap-3">
+        <div className="max-w-7xl mx-auto pt-4 flex justify-center text-[11px] text-gray-500">
           <span>© 2026 SmartSurge. All rights reserved.</span>
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-gray-300 transition">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-300 transition">Terms of Service</a>
-          </div>
         </div>
       </footer>
 

@@ -217,11 +217,9 @@ export default function Appliances() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className={`p-2.5 rounded-xl border ${isOn ? 'bg-emerald-50 border-emerald-100' : 'bg-gray-50 border-gray-100'}`}>
-                        {getCategoryIcon(app.category, isOn)}
-                      </div>
-                      <span className="text-[11px] font-semibold text-gray-500 px-2.5 py-0.5 rounded-full bg-gray-100">
+                    <div className="flex items-center gap-2">
+                      {getCategoryIcon(app.category, isOn)}
+                      <span className="text-xs font-semibold text-gray-500 font-mono">
                         {app.category}
                       </span>
                     </div>
