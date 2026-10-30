@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Plus, 
   Trash2, 
@@ -12,7 +12,9 @@ import {
   CheckCircle2, 
   X,
   Sliders,
-  DollarSign
+  DollarSign,
+  Search,
+  ArrowUpDown
 } from 'lucide-react';
 import API from '../services/api';
 
@@ -20,6 +22,8 @@ export default function Appliances() {
   const [appliances, setAppliances] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -113,9 +117,37 @@ export default function Appliances() {
   const activeLoad = activeAppliances.reduce((sum, a) => sum + (a.ratedWattage || 0), 0);
   const hourlyCostEst = +((activeLoad / 1000) * 35).toFixed(2);
 
-  const filteredAppliances = activeCategory === 'All'
-    ? appliances
-    : appliances.filter((a) => a.category === activeCategory);
+  // Search, Filter, and Sort Processing
+  const filteredAppliances = useMemo(() => {
+    return appliances
+      .filter((app) => {
+        // Category Filter
+        const matchesCategory = activeCategory === 'All' || app.category === activeCategory;
+        // Search Filter (by name or category)
+        const query = searchQuery.trim().toLowerCase();
+        const matchesSearch = !query || 
+          (app.name && app.name.toLowerCase().includes(query)) ||
+          (app.category && app.category.toLowerCase().includes(query));
+        return matchesCategory && matchesSearch;
+      })
+      .sort((a, b) => {
+        switch (sortBy) {
+          case 'wattage-desc':
+            return (b.ratedWattage || 0) - (a.ratedWattage || 0);
+          case 'wattage-asc':
+            return (a.ratedWattage || 0) - (b.ratedWattage || 0);
+          case 'name-asc':
+            return (a.name || '').localeCompare(b.name || '');
+          case 'name-desc':
+            return (b.name || '').localeCompare(a.name || '');
+          case 'status':
+            return (b.status === 'ON' ? 1 : 0) - (a.status === 'ON' ? 1 : 0);
+          case 'newest':
+          default:
+            return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+        }
+      });
+  }, [appliances, activeCategory, searchQuery, sortBy]);
 
   return (
     <div className="h-full overflow-y-auto p-4 sm:p-6 relative z-10 w-full max-w-7xl mx-auto flex flex-col gap-5">
@@ -169,20 +201,64 @@ export default function Appliances() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 flex-shrink-0">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-1.5 rounded-full text-xs font-medium transition flex-shrink-0 ${
-              activeCategory === cat
-                ? 'bg-[#236144] text-white shadow-xs'
-                : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
+      {/* Search, Filter & Sort Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-shrink-0">
+        {/* Category Filter Pills */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 flex-1">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-1.5 rounded-full text-xs font-medium transition flex-shrink-0 ${
+                activeCategory === cat
+                  ? 'bg-[#236144] text-white shadow-xs'
+                  : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Search & Sort Controls */}
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          {/* Live Search Input */}
+          <div className="relative w-full sm:w-56">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
+            <input
+              type="text"
+              placeholder="Search appliances..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-7 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#236144] transition shadow-2xs"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-0.5"
+              >
+                <X size={12} />
+              </button>
+            )}
+          </div>
+
+          {/* Sort Dropdown */}
+          <div className="relative flex items-center">
+            <ArrowUpDown className="absolute left-3 text-gray-400 pointer-events-none" size={13} />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="pl-8 pr-6 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-700 font-medium focus:outline-none focus:border-[#236144] transition appearance-none cursor-pointer shadow-2xs"
+            >
+              <option value="newest">Newest First</option>
+              <option value="wattage-desc">Highest Wattage</option>
+              <option value="wattage-asc">Lowest Wattage</option>
+              <option value="name-asc">Name (A - Z)</option>
+              <option value="name-desc">Name (Z - A)</option>
+              <option value="status">Active (ON) First</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       {loading ? (

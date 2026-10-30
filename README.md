@@ -65,11 +65,19 @@ The SmartSurge platform incorporates a suite of 8 specialized household energy m
 - **Quick Appliance Control:** Instant toggle switch widgets right from the dashboard to remotely switch connected smart plugs ON or OFF.
 - **Dynamic Cost Projection:** Live-updating monthly expenditure predictions based on active telemetry.
 
-### 5. Appliances Management (Complete CRUD)
-- **Device Inventory:** View all household appliances categorized by AC, Refrigerator, Washing Machine, TV, Lighting, and Other.
+### 5. Appliances Management (Complete CRUD with Search, Filter & Sort)
+- **Live Search Bar:** Real-time search by appliance name or category to find devices instantly.
+- **Category Filter Pills:** Quick filtering by appliance type (`All`, `AC`, `Refrigerator`, `Washing Machine`, `TV`, `Lighting`, `Other`).
+- **Multi-Criteria Sorting:** Sort appliances dynamically by:
+  - *Highest Wattage*
+  - *Lowest Wattage*
+  - *Name (A - Z)*
+  - *Name (Z - A)*
+  - *Active (ON) First*
+  - *Newest Added*
+- **Device Inventory:** View all household appliances with live power metrics, smart plug flags, and status badges.
 - **Add New Appliance:** Modal form with rated wattage specification, category selection, and smart plug assignment.
-- **Edit Appliance Details:** Modify appliance name, category, or power rating with immediate recalculation of total household connected load.
-- **Delete Appliance:** Safe removal with confirmation modal to prevent accidental data loss.
+- **Edit & Delete Appliance Details:** Safe removal with confirmation dialogs and real-time total load recalculation.
 - **Interactive State Toggling:** Remote relay state switching with live database synchronization and Socket.io event broadcasting.
 
 ### 6. CEB / LECO Domestic Tariff Billing Engine
