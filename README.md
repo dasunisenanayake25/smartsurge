@@ -77,7 +77,8 @@ The SmartSurge platform incorporates a suite of 8 specialized household energy m
   - *Newest Added*
 - **Device Inventory:** View all household appliances with live power metrics, smart plug flags, and status badges.
 - **Add New Appliance:** Modal form with rated wattage specification, category selection, and smart plug assignment.
-- **Edit & Delete Appliance Details:** Safe removal with confirmation dialogs and real-time total load recalculation.
+- **Edit Appliance Details:** Dedicated edit modal (pencil icon) allowing users to update device name, category, rated wattage, and smart plug linkage in real-time.
+- **Delete Appliance:** Safe removal with confirmation dialogs and real-time total load recalculation.
 - **Interactive State Toggling:** Remote relay state switching with live database synchronization and Socket.io event broadcasting.
 
 ### 6. CEB / LECO Domestic Tariff Billing Engine

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Plus, 
   Trash2, 
+  Edit3,
   Power, 
   Fan, 
   Refrigerator, 
@@ -25,6 +26,7 @@ export default function Appliances() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingAppliance, setEditingAppliance] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     category: 'AC',
@@ -73,19 +75,56 @@ export default function Appliances() {
     }
   };
 
-  const handleAddSubmit = async (e) => {
+  const openAddModal = () => {
+    setEditingAppliance(null);
+    setFormData({
+      name: '',
+      category: 'AC',
+      ratedWattage: '',
+      isSmartPlugConnected: true,
+    });
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (app) => {
+    setEditingAppliance(app);
+    setFormData({
+      name: app.name || '',
+      category: app.category || 'Other',
+      ratedWattage: app.ratedWattage || '',
+      isSmartPlugConnected: !!app.isSmartPlugConnected,
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.ratedWattage) return;
 
     try {
-      const { data } = await API.post('/appliances', {
-        name: formData.name,
-        category: formData.category,
-        ratedWattage: Number(formData.ratedWattage),
-        isSmartPlugConnected: formData.isSmartPlugConnected,
-      });
-      setAppliances((prev) => [...prev, data]);
+      if (editingAppliance) {
+        // Update existing appliance
+        const { data } = await API.put(`/appliances/${editingAppliance._id}`, {
+          name: formData.name,
+          category: formData.category,
+          ratedWattage: Number(formData.ratedWattage),
+          isSmartPlugConnected: formData.isSmartPlugConnected,
+        });
+        setAppliances((prev) =>
+          prev.map((app) => (app._id === editingAppliance._id ? { ...app, ...data } : app))
+        );
+      } else {
+        // Create new appliance
+        const { data } = await API.post('/appliances', {
+          name: formData.name,
+          category: formData.category,
+          ratedWattage: Number(formData.ratedWattage),
+          isSmartPlugConnected: formData.isSmartPlugConnected,
+        });
+        setAppliances((prev) => [...prev, data]);
+      }
       setIsModalOpen(false);
+      setEditingAppliance(null);
       setFormData({
         name: '',
         category: 'AC',
@@ -93,7 +132,7 @@ export default function Appliances() {
         isSmartPlugConnected: true,
       });
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to add appliance');
+      alert(err.response?.data?.message || 'Failed to save appliance');
     }
   };
 
@@ -162,7 +201,7 @@ export default function Appliances() {
         </div>
 
         <button
-          onClick={() => setIsModalOpen(true)}
+          onClick={openAddModal}
           className="inline-flex items-center gap-2 bg-[#236144] hover:bg-[#1a4a34] text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition"
         >
           <Plus size={16} />
@@ -275,7 +314,7 @@ export default function Appliances() {
             Add your air conditioner, refrigerator, TV, or smart plugs to monitor and schedule energy.
           </p>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={openAddModal}
             className="inline-flex items-center gap-2 bg-[#236144] hover:bg-[#1a4a34] text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold shadow-sm transition"
           >
             <Plus size={16} />
@@ -300,13 +339,22 @@ export default function Appliances() {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => handleDelete(app._id)}
-                      className="text-gray-400 hover:text-red-500 p-1.5 rounded-lg transition"
-                      title="Delete appliance"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => openEditModal(app)}
+                        className="text-gray-400 hover:text-[#236144] p-1.5 rounded-lg hover:bg-emerald-50 transition"
+                        title="Edit appliance details"
+                      >
+                        <Edit3 size={15} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(app._id)}
+                        className="text-gray-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition"
+                        title="Delete appliance"
+                      >
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
                   </div>
 
                   <h3 className="text-base font-bold text-[#113621] dark:text-emerald-100 mb-1">{app.name}</h3>
@@ -341,16 +389,21 @@ export default function Appliances() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-100 relative">
             <div className="flex items-center justify-between pb-3 border-b border-gray-100 mb-4">
-              <h3 className="text-lg font-bold text-[#113621] dark:text-emerald-100">Add New Appliance</h3>
+              <h3 className="text-lg font-bold text-[#113621] dark:text-emerald-100">
+                {editingAppliance ? 'Edit Appliance' : 'Add New Appliance'}
+              </h3>
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setEditingAppliance(null);
+                }}
                 className="text-gray-400 hover:text-gray-700 p-1 rounded-lg"
               >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleAddSubmit} className="flex flex-col gap-4 text-left">
+            <form onSubmit={handleFormSubmit} className="flex flex-col gap-4 text-left">
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">Appliance Name</label>
                 <input
